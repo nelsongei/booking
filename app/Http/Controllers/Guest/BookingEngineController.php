@@ -63,6 +63,22 @@ class BookingEngineController extends Controller
     }
 
     /**
+     * Embeddable Search Widget Route (Iframe / Standalone).
+     */
+    public function widget(Request $request, string $slug)
+    {
+        $property = $this->resolveProperty($slug);
+
+        $checkIn  = $request->get('check_in', now()->addDay()->toDateString());
+        $checkOut = $request->get('check_out', now()->addDays(3)->toDateString());
+        $adults   = (int) $request->get('adults', 2);
+        $children = (int) $request->get('children', 0);
+        $rooms    = (int) $request->get('rooms', 1);
+
+        return view('booking.widget', compact('property', 'checkIn', 'checkOut', 'adults', 'children', 'rooms'));
+    }
+
+    /**
      * Step 2: Search Room Availability & Rate Quotes.
      */
     public function search(Request $request, string $slug)

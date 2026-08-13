@@ -160,6 +160,7 @@ Route::prefix('booking')->name('booking.')->group(function () {
 
     // Property Guest Booking Engine Funnel
     Route::get('/{slug}',                                   [BookingEngineController::class, 'index'])->name('index');
+    Route::get('/{slug}/widget',                            [BookingEngineController::class, 'widget'])->name('widget');
     Route::get('/{slug}/search',                            [BookingEngineController::class, 'search'])->name('search');
     Route::match(['get', 'post'], '/{slug}/addons',        [BookingEngineController::class, 'addons'])->name('addons');
     Route::match(['get', 'post'], '/{slug}/guest-details', [BookingEngineController::class, 'guestDetails'])->name('guest-details');
