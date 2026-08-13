@@ -139,6 +139,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'tagline',             'value' => 'Seafront Boutique Hotel in Stone Town, Zanzibar', 'type' => 'string'],
             ['key' => 'restaurant_name',     'value' => 'Bahari Restaurant', 'type' => 'string'],
             ['key' => 'hero_badge',          'value' => 'UNESCO Stone Town Heritage', 'type' => 'string'],
+            ['key' => 'logo_url',            'value' => '/images/logo-tembo-hotel.png', 'type' => 'string'],
         ];
         foreach ($propASettings as $st) {
             \App\Infrastructure\Persistence\PropertySetting::firstOrCreate(
@@ -154,6 +155,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'tagline',             'value' => 'Seafront Luxury Beach Resort in Kiwengwa, Zanzibar', 'type' => 'string'],
             ['key' => 'restaurant_name',     'value' => 'Sea Salt Restaurant', 'type' => 'string'],
             ['key' => 'hero_badge',          'value' => 'Exclusive Kiwengwa Beach Lagoon', 'type' => 'string'],
+            ['key' => 'logo_url',            'value' => '/images/logo-tembo-kiwengwa.png', 'type' => 'string'],
         ];
         foreach ($propBSettings as $st) {
             \App\Infrastructure\Persistence\PropertySetting::firstOrCreate(

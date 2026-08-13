@@ -111,4 +111,14 @@ class Property extends Model
     {
         return $this->getSetting('hero_badge', str_contains($this->slug, 'kiwengwa') ? 'Exclusive Kiwengwa Beach Lagoon' : 'UNESCO Stone Town Heritage');
     }
+
+    public function getLogoUrl(): string
+    {
+        return $this->getSetting(
+            'logo_url',
+            str_contains($this->slug, 'kiwengwa')
+                ? asset('images/logo-tembo-kiwengwa.png')
+                : asset('images/logo-tembo-hotel.png')
+        );
+    }
 }

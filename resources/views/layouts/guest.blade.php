@@ -454,8 +454,12 @@
     <nav class="navbar navbar-expand-lg navbar-guest sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('booking.index', ['slug' => $property->slug ?? 'tembo-hotel']) }}">
-                <div class="brand-logo-box">
-                    <i class="fa-solid fa-crown"></i>
+                <div class="brand-logo-box p-1 me-3 d-flex align-items-center justify-content-center" style="background: transparent; border: none; box-shadow: none; width: auto; height: 44px;">
+                    @if(isset($property))
+                        <img src="{{ $property->getLogoUrl() }}" alt="{{ $property->name }}" style="max-height: 42px; width: auto; object-fit: contain;">
+                    @else
+                        <i class="fa-solid fa-crown text-warning fs-3"></i>
+                    @endif
                 </div>
                 <div>
                     <div class="d-flex align-items-center">
@@ -517,14 +521,18 @@
     </main>
 
     <!-- Premium Enterprise Footer -->
-    <footer class="bg-dark text-light py-5 mt-5" style="background: var(--primary-obsidian) !important; border-top: 1px solid rgba(255,255,255,0.08);">
+    <footer class="text-light py-5 mt-5" style="background: {{ isset($property) ? $property->getPrimaryColor() : 'var(--primary-obsidian)' }} !important; border-top: 1px solid rgba(255,255,255,0.15);">
         <div class="container">
             <div class="row g-4 mb-4">
                 <div class="col-lg-5">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="brand-logo-box">
-                            <i class="fa-solid fa-crown text-warning"></i>
-                        </div>
+                    <div class="d-flex align-items-center mb-3 gap-3">
+                        @if(isset($property))
+                            <img src="{{ $property->getLogoUrl() }}" alt="{{ $property->name }}" style="max-height: 52px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
+                        @else
+                            <div class="brand-logo-box">
+                                <i class="fa-solid fa-crown text-warning"></i>
+                            </div>
+                        @endif
                         <span class="fs-4 fw-extrabold text-white">{{ $property->name ?? 'Tembo Hotel' }}</span>
                     </div>
                     <p class="text-white-50 small pe-lg-4">
