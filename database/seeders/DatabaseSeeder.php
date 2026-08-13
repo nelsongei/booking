@@ -139,10 +139,11 @@ class DatabaseSeeder extends Seeder
             ['key' => 'tagline',             'value' => 'Seafront Boutique Hotel in Stone Town, Zanzibar', 'type' => 'string'],
             ['key' => 'restaurant_name',     'value' => 'Bahari Restaurant', 'type' => 'string'],
             ['key' => 'hero_badge',          'value' => 'UNESCO Stone Town Heritage', 'type' => 'string'],
-            ['key' => 'logo_url',            'value' => '/images/logo-tembo-hotel.png', 'type' => 'string'],
+            ['key' => 'logo_dark_url',       'value' => '/images/logo-tembo-hotel-dark.png', 'type' => 'string'],
+            ['key' => 'logo_light_url',      'value' => '/images/logo-tembo-hotel-light.png', 'type' => 'string'],
         ];
         foreach ($propASettings as $st) {
-            \App\Infrastructure\Persistence\PropertySetting::firstOrCreate(
+            \App\Infrastructure\Persistence\PropertySetting::updateOrCreate(
                 ['property_id' => $propA->id, 'key' => $st['key']],
                 ['value' => $st['value'], 'type' => $st['type']]
             );
@@ -155,10 +156,11 @@ class DatabaseSeeder extends Seeder
             ['key' => 'tagline',             'value' => 'Seafront Luxury Beach Resort in Kiwengwa, Zanzibar', 'type' => 'string'],
             ['key' => 'restaurant_name',     'value' => 'Sea Salt Restaurant', 'type' => 'string'],
             ['key' => 'hero_badge',          'value' => 'Exclusive Kiwengwa Beach Lagoon', 'type' => 'string'],
-            ['key' => 'logo_url',            'value' => '/images/logo-tembo-kiwengwa.png', 'type' => 'string'],
+            ['key' => 'logo_dark_url',       'value' => '/images/logo-tembo-kiwengwa-dark.png', 'type' => 'string'],
+            ['key' => 'logo_light_url',      'value' => '/images/logo-tembo-kiwengwa-light.png', 'type' => 'string'],
         ];
         foreach ($propBSettings as $st) {
-            \App\Infrastructure\Persistence\PropertySetting::firstOrCreate(
+            \App\Infrastructure\Persistence\PropertySetting::updateOrCreate(
                 ['property_id' => $propB->id, 'key' => $st['key']],
                 ['value' => $st['value'], 'type' => $st['type']]
             );
