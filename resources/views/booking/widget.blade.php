@@ -64,6 +64,25 @@
             border-color: var(--brand-primary);
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 6px;
+            }
+            .widget-card {
+                padding: 14px;
+            }
+            .btn-widget {
+                width: 100%;
+                margin-top: 6px;
+            }
+            .flatpickr-calendar.multiMonth {
+                width: calc(100vw - 20px) !important;
+                max-width: 320px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+        }
     </style>
 </head>
 <body>

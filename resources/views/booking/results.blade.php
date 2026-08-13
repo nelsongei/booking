@@ -113,7 +113,7 @@
                         @endif
 
                         <div class="position-absolute bottom-0 start-0 p-4 text-white">
-                            <span class="badge bg-white bg-opacity-20 text-white border border-white border-opacity-25 rounded-pill px-3 py-1 mb-2 small fw-bold">{{ $rt->code }}</span>
+                            <span class="badge rounded-pill px-3 py-1 mb-2 small fw-bold" style="background: rgba(15, 23, 42, 0.8) !important; color: #ffffff !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; backdrop-filter: blur(4px);">{{ $rt->code }}</span>
                             <h3 class="fw-extrabold mb-1 font-serif text-white">{{ $rt->name }}</h3>
                             <small class="text-white-50"><i class="fa-solid fa-users me-1 text-warning"></i> Up to {{ $rt->max_occupancy }} Guests</small>
                         </div>

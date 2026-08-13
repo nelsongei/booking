@@ -427,21 +427,147 @@
             background: #e2e8f0;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
+        /* ===== COMPREHENSIVE MOBILE RESPONSIVENESS ===== */
+        @media (max-width: 991px) {
+            .navbar-guest {
+                padding: 12px 0;
+            }
             .hero-banner-premium {
-                padding: 32px 24px;
+                padding: 36px 28px;
+                border-radius: 20px;
+            }
+            .hero-banner-premium h1 {
+                font-size: 2.2rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 0.9rem;
+            }
+            .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .hero-banner-premium {
+                padding: 28px 20px;
+                margin-bottom: 20px;
+                border-radius: 18px;
+            }
+            .hero-banner-premium h1 {
+                font-size: 1.75rem !important;
+                line-height: 1.25;
+            }
+            .hero-banner-premium p.lead {
+                font-size: 0.95rem !important;
+            }
+            
+            /* Navbar on Mobile */
+            .brand-title {
+                font-size: 1.05rem;
+            }
+            .brand-badge {
+                font-size: 0.55rem;
+                padding: 2px 6px;
+                margin-left: 4px;
+            }
+            .brand-logo-box {
+                width: 38px;
+                height: 38px;
+                margin-right: 8px;
+            }
+
+            /* Wizard Progress Bar on Mobile */
+            .wizard-container {
+                margin-bottom: 20px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
             .step-progress-bar {
-                overflow-x: auto;
-                padding: 10px 14px;
-                gap: 8px;
+                display: flex;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+                padding: 8px 12px;
+                justify-content: flex-start;
+                gap: 4px;
+                scrollbar-width: none;
+                border-radius: 16px;
             }
-            .step-text {
+            .step-progress-bar::-webkit-scrollbar {
                 display: none;
             }
-            .step-item.active .step-text {
-                display: inline;
+            .step-item {
+                padding: 5px 12px;
+                font-size: 0.78rem;
+                flex-shrink: 0;
+            }
+            .step-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.72rem;
+                margin-right: 6px;
+            }
+            .step-text {
+                display: inline-block !important;
+            }
+
+            /* Search Card & Form Controls on Mobile */
+            .card-custom {
+                border-radius: 18px;
+                padding: 20px 16px !important;
+            }
+
+            /* Flatpickr Calendar Mobile Center Fix */
+            .flatpickr-calendar.multiMonth {
+                width: calc(100vw - 32px) !important;
+                max-width: 340px !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+            }
+            .flatpickr-calendar.multiMonth .flatpickr-days {
+                width: 100% !important;
+            }
+            .flatpickr-calendar.multiMonth .dayContainer {
+                width: 100% !important;
+                min-width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            /* Occupancy Popover on Mobile */
+            .occupancy-popover-card {
+                position: fixed !important;
+                top: auto !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                min-width: 100% !important;
+                border-radius: 24px 24px 0 0 !important;
+                box-shadow: 0 -10px 40px rgba(15, 23, 42, 0.25) !important;
+                margin-top: 0 !important;
+                z-index: 100000 !important;
+                animation: slideUpMobile 0.3s ease;
+            }
+
+            @keyframes slideUpMobile {
+                from { transform: translateY(100%); }
+                to { transform: translateY(0); }
+            }
+
+            /* Buttons & Badges on Mobile */
+            .btn-brand, .btn-outline-custom {
+                width: 100%;
+                padding: 13px 20px;
+                justify-content: center;
+            }
+            .price-tag {
+                font-size: 1.45rem;
+            }
+            .border-end-md {
+                border-right: none !important;
+                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 16px;
+                margin-bottom: 16px;
             }
         }
     </style>

@@ -11,7 +11,7 @@
                 <span class="hero-badge-star">
                     <i class="fa-solid fa-crown"></i> {{ $property->getHeroBadge() }}
                 </span>
-                <span class="badge rounded-pill bg-white bg-opacity-20 text-white border border-white border-opacity-25 px-3 py-2 fw-semibold">
+                <span class="badge rounded-pill px-3 py-2 fw-semibold" style="background: rgba(15, 23, 42, 0.6) !important; color: #ffffff !important; border: 1px solid rgba(255, 255, 255, 0.3) !important; backdrop-filter: blur(4px);">
                     <i class="fa-solid fa-shield-cat text-warning me-1"></i> Best Rate Guaranteed
                 </span>
             </div>
@@ -164,7 +164,7 @@
             </div>
 
             <!-- Search Button -->
-            <div class="col-md-2">
+            <div class="col-12 col-md-2">
                 <button type="submit" class="btn btn-brand w-100 py-3" style="height: 48px;">
                     <i class="fa-solid fa-magnifying-glass fs-6 me-1"></i> Search
                 </button>
