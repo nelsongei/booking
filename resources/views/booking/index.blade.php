@@ -9,14 +9,15 @@
         <div class="col-lg-8">
             <div class="mb-3 d-flex flex-wrap align-items-center gap-2">
                 <span class="hero-badge-star">
-                    <i class="fa-solid fa-star"></i> 5-Star Luxury Experience
+                    <i class="fa-solid fa-crown"></i> {{ $property->getHeroBadge() }}
                 </span>
                 <span class="badge rounded-pill bg-white bg-opacity-20 text-white border border-white border-opacity-25 px-3 py-2 fw-semibold">
                     <i class="fa-solid fa-shield-cat text-warning me-1"></i> Best Rate Guaranteed
                 </span>
             </div>
             <h1 class="display-4 fw-extrabold text-white mb-2 font-serif" style="letter-spacing: -0.02em;">{{ $property->name }}</h1>
-            <p class="lead text-white-50 mb-4 fs-5">
+            <p class="lead text-white-50 mb-2 fs-5 fw-medium">{{ $property->getTagline() }}</p>
+            <p class="text-white-50 mb-4 small">
                 <i class="fa-solid fa-location-dot text-warning me-2"></i>
                 {{ $property->address_line1 }}, {{ $property->city }}, {{ $property->country }}
             </p>
@@ -220,8 +221,8 @@
                             <i class="fa-solid fa-utensils fs-4"></i>
                         </div>
                         <div>
-                            <div class="fw-bold text-dark">Gourmet Dining</div>
-                            <small class="text-muted">In-house fine dining options</small>
+                            <div class="fw-bold text-dark">{{ $property->getRestaurantName() }}</div>
+                            <small class="text-muted">Signature Oceanfront Dining</small>
                         </div>
                     </div>
                 </div>

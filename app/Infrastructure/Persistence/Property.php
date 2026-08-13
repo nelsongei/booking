@@ -71,4 +71,44 @@ class Property extends Model
     {
         return $this->check_in_out_times['check_out'] ?? '12:00';
     }
+
+    public function getPrimaryColor(): string
+    {
+        return $this->getSetting('theme_primary_color', str_contains($this->slug, 'kiwengwa') ? '#0d9488' : '#c5a059');
+    }
+
+    public function getAccentColor(): string
+    {
+        return $this->getSetting('theme_accent_color', str_contains($this->slug, 'kiwengwa') ? '#06b6d4' : '#d4af37');
+    }
+
+    public function getDarkColor(): string
+    {
+        return $this->getSetting('theme_dark_color', str_contains($this->slug, 'kiwengwa') ? '#0a2540' : '#0f172a');
+    }
+
+    public function getTagline(): string
+    {
+        return $this->getSetting(
+            'tagline',
+            str_contains($this->slug, 'kiwengwa')
+                ? 'Seafront Luxury Beach Resort in Kiwengwa, Zanzibar'
+                : 'Seafront Boutique Hotel in Stone Town, Zanzibar'
+        );
+    }
+
+    public function getOfficialWebsite(): string
+    {
+        return $this->website ?? (str_contains($this->slug, 'kiwengwa') ? 'https://tembokiwengwaresort.com/' : 'https://tembohotel.com/');
+    }
+
+    public function getRestaurantName(): string
+    {
+        return $this->getSetting('restaurant_name', str_contains($this->slug, 'kiwengwa') ? 'Sea Salt Restaurant' : 'Bahari Restaurant');
+    }
+
+    public function getHeroBadge(): string
+    {
+        return $this->getSetting('hero_badge', str_contains($this->slug, 'kiwengwa') ? 'Exclusive Kiwengwa Beach Lagoon' : 'UNESCO Stone Town Heritage');
+    }
 }

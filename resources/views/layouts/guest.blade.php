@@ -85,13 +85,13 @@
             cursor: not-allowed !important;
         }
         :root {
-            --primary-dark: #0f172a;
-            --primary-obsidian: #0b0f19;
-            --brand-gold: #c5a059;
-            --brand-gold-light: #f5edda;
-            --brand-gold-hover: #b38e46;
-            --brand-accent: #ccf235;
-            --brand-accent-hover: #b8de28;
+            --primary-dark: {{ isset($property) ? $property->getDarkColor() : '#0f172a' }};
+            --primary-obsidian: {{ isset($property) ? $property->getDarkColor() : '#0b0f19' }};
+            --brand-gold: {{ isset($property) ? $property->getPrimaryColor() : '#c5a059' }};
+            --brand-gold-light: rgba(197, 160, 89, 0.12);
+            --brand-gold-hover: {{ isset($property) ? $property->getPrimaryColor() : '#b38e46' }};
+            --brand-accent: {{ isset($property) ? $property->getPrimaryColor() : '#c5a059' }};
+            --brand-accent-hover: {{ isset($property) ? $property->getAccentColor() : '#b8de28' }};
             --bg-canvas: #f8fafc;
             --card-bg: #ffffff;
             --card-border: #e2e8f0;
@@ -106,7 +106,7 @@
             --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.03);
             --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
             --shadow-lg: 0 20px 40px -10px rgba(15, 23, 42, 0.12), 0 10px 20px -8px rgba(15, 23, 42, 0.06);
-            --shadow-glow: 0 0 30px rgba(204, 242, 53, 0.25);
+            --shadow-glow: 0 0 30px rgba(197, 160, 89, 0.25);
         }
 
         body {
@@ -466,6 +466,11 @@
                 </div>
             </a>
             <div class="d-flex align-items-center gap-3 ms-auto">
+                @if(isset($property))
+                <a href="{{ $property->getOfficialWebsite() }}" target="_blank" class="d-none d-lg-inline-flex align-items-center gap-2 text-decoration-none small fw-semibold px-3 py-2 rounded-pill border" style="background: rgba(255,255,255,0.7); color: var(--primary-dark);">
+                    <i class="fa-solid fa-globe text-primary"></i> {{ parse_url($property->getOfficialWebsite(), PHP_URL_HOST) }}
+                </a>
+                @endif
                 <span class="d-none d-md-inline-flex align-items-center gap-2 text-muted small fw-semibold">
                     <i class="fa-solid fa-shield-halved text-success"></i> Best Price Guarantee
                 </span>
@@ -534,10 +539,13 @@
                 <div class="col-lg-3 col-sm-6">
                     <h6 class="fw-bold text-white text-uppercase mb-3" style="font-size: 0.8rem; letter-spacing: 0.1em;">Guest Support</h6>
                     <ul class="list-unstyled text-white-50 small d-flex flex-column gap-2 mb-0">
-                        <li><i class="fa-solid fa-phone text-warning me-2"></i> Concierge: {{ $property->phone ?? '+254 20 000 0001' }}</li>
-                        <li><i class="fa-solid fa-envelope text-warning me-2"></i> {{ $property->email ?? 'reservations@hotel.com' }}</li>
+                        <li><i class="fa-solid fa-phone text-warning me-2"></i> Concierge: {{ $property->phone ?? '+255 24 223 3005' }}</li>
+                        <li><i class="fa-solid fa-envelope text-warning me-2"></i> {{ $property->email ?? 'reservations@tembohotel.com' }}</li>
                         <li><i class="fa-solid fa-clock text-warning me-2"></i> 24/7 Reception Desk</li>
-                        <li><i class="fa-solid fa-map-pin text-warning me-2"></i> {{ $property->city ?? 'Nairobi' }}, {{ $property->country ?? 'KE' }}</li>
+                        <li><i class="fa-solid fa-map-pin text-warning me-2"></i> {{ $property->city ?? 'Zanzibar' }}, {{ $property->country ?? 'TZ' }}</li>
+                        @if(isset($property) && $property->website)
+                        <li><i class="fa-solid fa-globe text-warning me-2"></i> <a href="{{ $property->website }}" target="_blank" class="text-white-50 text-decoration-none">{{ parse_url($property->website, PHP_URL_HOST) }}</a></li>
+                        @endif
                     </ul>
                 </div>
 

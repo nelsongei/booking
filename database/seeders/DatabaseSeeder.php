@@ -85,18 +85,19 @@ class DatabaseSeeder extends Seeder
             ['organization_id' => $org->id, 'code' => 'TH001'],
             [
                 'ulid'                 => (string) Str::ulid(),
-                'name'                 => 'Tembo Hotel',
+                'name'                 => 'Tembo House Hotel',
                 'slug'                 => 'tembo-hotel',
                 'type'                 => 'hotel',
-                'description'          => 'A premier 5-star hotel in Stone Town, Zanzibar.',
-                'address_line1'        => 'Forodhani Street, Stone Town',
+                'description'          => 'As the first beachfront hotel within the UNESCO Heritage Site of Stone Town, Tembo House Hotel combines Swahili heritage, beachfront elegance, and world-class luxury.',
+                'address_line1'        => 'P.O. BOX 3974 Shangani, Stone Town',
                 'city'                 => 'Zanzibar',
                 'country'              => 'TZ',
+                'website'              => 'https://tembohotel.com/',
                 'currency'             => 'USD',
                 'timezone'             => 'Africa/Dar_es_Salaam',
                 'locale'               => 'en',
                 'star_rating'          => 5,
-                'email'                => 'hotel@tembohotel.com',
+                'email'                => 'reservations@tembohotel.com',
                 'phone'                => '+255 24 223 3005',
                 'status'               => 'active',
                 'booking_engine_enabled' => true,
@@ -109,25 +110,57 @@ class DatabaseSeeder extends Seeder
             ['organization_id' => $org->id, 'code' => 'TH002'],
             [
                 'ulid'                 => (string) Str::ulid(),
-                'name'                 => 'Tembo Kiwengwa Hotel',
+                'name'                 => 'Tembo Kiwengwa Resort',
                 'slug'                 => 'tembo-kiwengwa',
                 'type'                 => 'resort',
-                'description'          => 'A luxury beach resort on Kiwengwa Beach, Zanzibar.',
-                'address_line1'        => 'Kiwengwa Main Road',
+                'description'          => 'An exclusive beachfront escape on the pristine coastline of Kiwengwa where turquoise waters, 5 swimming pools, Zuri Rituals Spa, and Swahili hospitality create the ultimate island retreat.',
+                'address_line1'        => 'Kiwengwa Beach Road',
                 'city'                 => 'Kiwengwa, Zanzibar',
                 'country'              => 'TZ',
+                'website'              => 'https://tembokiwengwaresort.com/',
                 'currency'             => 'USD',
                 'timezone'             => 'Africa/Dar_es_Salaam',
                 'locale'               => 'en',
                 'star_rating'          => 5,
-                'email'                => 'kiwengwa@tembohotel.com',
-                'phone'                => '+255 24 223 3006',
+                'email'                => 'reservations@tembokiwengwaresort.com',
+                'phone'                => '+255 678 413 348',
                 'status'               => 'active',
                 'booking_engine_enabled' => true,
                 'booking_engine_slug'  => 'tembo-kiwengwa',
                 'check_in_out_times'   => ['check_in' => '15:00', 'check_out' => '11:00'],
             ]
         );
+
+        // ─── Property Settings / Custom Branding ───────────────────────────
+        $propASettings = [
+            ['key' => 'theme_primary_color', 'value' => '#c5a059', 'type' => 'string'],
+            ['key' => 'theme_accent_color',  'value' => '#d4af37', 'type' => 'string'],
+            ['key' => 'theme_dark_color',    'value' => '#0f172a', 'type' => 'string'],
+            ['key' => 'tagline',             'value' => 'Seafront Boutique Hotel in Stone Town, Zanzibar', 'type' => 'string'],
+            ['key' => 'restaurant_name',     'value' => 'Bahari Restaurant', 'type' => 'string'],
+            ['key' => 'hero_badge',          'value' => 'UNESCO Stone Town Heritage', 'type' => 'string'],
+        ];
+        foreach ($propASettings as $st) {
+            \App\Infrastructure\Persistence\PropertySetting::firstOrCreate(
+                ['property_id' => $propA->id, 'key' => $st['key']],
+                ['value' => $st['value'], 'type' => $st['type']]
+            );
+        }
+
+        $propBSettings = [
+            ['key' => 'theme_primary_color', 'value' => '#0d9488', 'type' => 'string'],
+            ['key' => 'theme_accent_color',  'value' => '#06b6d4', 'type' => 'string'],
+            ['key' => 'theme_dark_color',    'value' => '#0a2540', 'type' => 'string'],
+            ['key' => 'tagline',             'value' => 'Seafront Luxury Beach Resort in Kiwengwa, Zanzibar', 'type' => 'string'],
+            ['key' => 'restaurant_name',     'value' => 'Sea Salt Restaurant', 'type' => 'string'],
+            ['key' => 'hero_badge',          'value' => 'Exclusive Kiwengwa Beach Lagoon', 'type' => 'string'],
+        ];
+        foreach ($propBSettings as $st) {
+            \App\Infrastructure\Persistence\PropertySetting::firstOrCreate(
+                ['property_id' => $propB->id, 'key' => $st['key']],
+                ['value' => $st['value'], 'type' => $st['type']]
+            );
+        }
 
         // ─── Users ─────────────────────────────────────────────────────────
         $admin = User::firstOrCreate(
