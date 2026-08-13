@@ -211,73 +211,287 @@ class DatabaseSeeder extends Seeder
             ['organization_id' => $org->id, 'is_active' => true]
         );
 
-        // ─── Room Types & Rooms for Nairobi ────────────────────────────────
-        $deluxeKing = RoomType::firstOrCreate(
-            ['property_id' => $propA->id, 'code' => 'DLXK'],
+        // ─── Room Types & Rooms for Tembo House Hotel (Stone Town) ──────────────
+        $thhDeluxe = RoomType::firstOrCreate(
+            ['property_id' => $propA->id, 'code' => 'THH-DLX'],
             [
                 'ulid'            => (string) Str::ulid(),
                 'organization_id' => $org->id,
-                'name'            => 'Deluxe King Room',
-                'description'     => 'Spacious room with a plush king bed and city view.',
+                'name'            => 'Deluxe Suite',
+                'description'     => 'Harmonious blend of modern luxury and timeless elegance, with stunning views of the Indian Ocean and Zanzibar heritage decor.',
                 'bed_type'        => 'king',
                 'base_occupancy'  => 2,
                 'max_adults'      => 2,
                 'max_children'    => 1,
                 'max_occupancy'   => 3,
-                'size_sqm'        => 38,
-                'view'            => 'city',
+                'size_sqm'        => 42,
+                'view'            => 'sea',
                 'status'          => 'active',
             ]
         );
 
-        $executiveSuite = RoomType::firstOrCreate(
-            ['property_id' => $propA->id, 'code' => 'EXEC'],
+        $thhPres = RoomType::firstOrCreate(
+            ['property_id' => $propA->id, 'code' => 'THH-PRES'],
             [
                 'ulid'            => (string) Str::ulid(),
                 'organization_id' => $org->id,
-                'name'            => 'Executive Suite',
-                'description'     => 'Luxurious suite with separate living room and lounge access.',
+                'name'            => 'Presidential Suite',
+                'description'     => 'Pinnacle of luxury and refinement with panoramic Indian Ocean views, expansive living spaces, and royal Zanzibari finishes.',
+                'bed_type'        => 'king',
+                'base_occupancy'  => 2,
+                'max_adults'      => 4,
+                'max_children'    => 2,
+                'max_occupancy'   => 6,
+                'size_sqm'        => 110,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $thhDbl = RoomType::firstOrCreate(
+            ['property_id' => $propA->id, 'code' => 'THH-DBL'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Double Room with Balcony & Sea View',
+                'description'     => 'Romantic escape featuring a private balcony with sea views, plush double bed, and serene ocean breezes.',
+                'bed_type'        => 'double',
+                'base_occupancy'  => 2,
+                'max_adults'      => 2,
+                'max_children'    => 0,
+                'max_occupancy'   => 2,
+                'size_sqm'        => 34,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $thhTwin = RoomType::firstOrCreate(
+            ['property_id' => $propA->id, 'code' => 'THH-TWN'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Twin Room with Balcony & Sea View',
+                'description'     => 'Coastal charm featuring a private balcony with sea views, two cozy single beds, and thoughtful modern amenities.',
+                'bed_type'        => 'twin',
+                'base_occupancy'  => 2,
+                'max_adults'      => 2,
+                'max_children'    => 1,
+                'max_occupancy'   => 3,
+                'size_sqm'        => 36,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $thhTriple = RoomType::firstOrCreate(
+            ['property_id' => $propA->id, 'code' => 'THH-TRP'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Triple Room with Balcony & Sea View',
+                'description'     => 'Spacious retreat for families or groups, featuring private balcony with sea views, double and single bedding.',
+                'bed_type'        => 'triple',
+                'base_occupancy'  => 3,
+                'max_adults'      => 3,
+                'max_children'    => 1,
+                'max_occupancy'   => 4,
+                'size_sqm'        => 48,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $thhFreddie = RoomType::firstOrCreate(
+            ['property_id' => $propA->id, 'code' => 'THH-FMA'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Freddie Mercury Apartment',
+                'description'     => 'Inspired by Zanzibar-born icon Freddie Mercury, featuring eclectic artistic decor, spacious living room, kitchenette, and sea view balcony.',
                 'bed_type'        => 'king',
                 'base_occupancy'  => 2,
                 'max_adults'      => 3,
-                'max_children'    => 2,
+                'max_children'    => 1,
                 'max_occupancy'   => 4,
+                'size_sqm'        => 75,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        // Physical Rooms for Tembo House Hotel
+        $thhRooms = [
+            ['room_number' => '101', 'room_type_id' => $thhDbl->id, 'status' => 'clean'],
+            ['room_number' => '102', 'room_type_id' => $thhTwin->id, 'status' => 'clean'],
+            ['room_number' => '103', 'room_type_id' => $thhTriple->id, 'status' => 'inspected'],
+            ['room_number' => '201', 'room_type_id' => $thhDeluxe->id, 'status' => 'clean'],
+            ['room_number' => '202', 'room_type_id' => $thhDeluxe->id, 'status' => 'dirty'],
+            ['room_number' => '301', 'room_type_id' => $thhPres->id, 'status' => 'clean'],
+            ['room_number' => '302', 'room_type_id' => $thhFreddie->id, 'status' => 'clean'],
+        ];
+
+        foreach ($thhRooms as $rm) {
+            Room::firstOrCreate(
+                ['property_id' => $propA->id, 'room_number' => $rm['room_number']],
+                ['ulid' => (string) Str::ulid(), 'room_type_id' => $rm['room_type_id'], 'status' => $rm['status']]
+            );
+        }
+
+        // ─── Room Types & Rooms for Tembo Kiwengwa Resort ──────────────
+        $tkrDblBal = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-DBLBAL'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Double Room with Balcony - Pool & Sea View',
+                'description'     => 'Panoramic views of the turquoise Indian Ocean and main pool from a private balcony, featuring a king-size bed and modern coastal resort styling.',
+                'bed_type'        => 'king',
+                'base_occupancy'  => 2,
+                'max_adults'      => 2,
+                'max_children'    => 1,
+                'max_occupancy'   => 3,
+                'size_sqm'        => 40,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $tkrTwinBal = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-TWNBAL'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Twin Room with Balcony - Pool & Sea View',
+                'description'     => 'Bright and airy twin room with private balcony overlooking the main pool and ocean, two single beds, perfect for sharing.',
+                'bed_type'        => 'twin',
+                'base_occupancy'  => 2,
+                'max_adults'      => 2,
+                'max_children'    => 1,
+                'max_occupancy'   => 3,
+                'size_sqm'        => 40,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $tkrDblPat = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-DBLPAT'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Double Room with Patio - Sea View & Walk-In Pool',
+                'description'     => 'Step directly from your private patio into a refreshing shared walk-in pool with uninterrupted ocean views.',
+                'bed_type'        => 'king',
+                'base_occupancy'  => 2,
+                'max_adults'      => 2,
+                'max_children'    => 1,
+                'max_occupancy'   => 3,
+                'size_sqm'        => 45,
+                'view'            => 'pool',
+                'status'          => 'active',
+            ]
+        );
+
+        $tkrDblPrv = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-DBLPRV'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Double Room with Patio - Sea View & Private Walk-In Pool',
+                'description'     => 'Ultimate coastal privacy featuring your own exclusive walk-in pool just steps from your king bed.',
+                'bed_type'        => 'king',
+                'base_occupancy'  => 2,
+                'max_adults'      => 2,
+                'max_children'    => 1,
+                'max_occupancy'   => 3,
+                'size_sqm'        => 52,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $tkrSteBal = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-STEBAL'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Suite with Balcony - Pool & Sea View',
+                'description'     => 'Expansive luxury suite featuring a separate living room, private balcony with ocean views, and premium resort amenities.',
+                'bed_type'        => 'king',
+                'base_occupancy'  => 2,
+                'max_adults'      => 3,
+                'max_children'    => 1,
+                'max_occupancy'   => 4,
+                'size_sqm'        => 70,
+                'view'            => 'sea',
+                'status'          => 'active',
+            ]
+        );
+
+        $tkrFamJac = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-FAMJAC'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Family Room with Jacuzzi & Garden View',
+                'description'     => 'Spacious family sanctuary featuring a private Jacuzzi tub, two bedrooms, and lush tropical garden views.',
+                'bed_type'        => 'family',
+                'base_occupancy'  => 4,
+                'max_adults'      => 4,
+                'max_children'    => 2,
+                'max_occupancy'   => 6,
+                'size_sqm'        => 85,
+                'view'            => 'garden',
+                'status'          => 'active',
+            ]
+        );
+
+        $tkrFamGdn = RoomType::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'TKR-FAMGDN'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Family Room with Garden View',
+                'description'     => 'Surrounded by lush tropical gardens, designed for families with ample space and relaxing terrace.',
+                'bed_type'        => 'family',
+                'base_occupancy'  => 4,
+                'max_adults'      => 4,
+                'max_children'    => 1,
+                'max_occupancy'   => 5,
                 'size_sqm'        => 65,
                 'view'            => 'garden',
                 'status'          => 'active',
             ]
         );
 
-        // Create Physical Rooms for Nairobi
-        $nairobiRooms = [
-            ['room_number' => '101', 'room_type_id' => $deluxeKing->id, 'status' => 'clean'],
-            ['room_number' => '102', 'room_type_id' => $deluxeKing->id, 'status' => 'clean'],
-            ['room_number' => '103', 'room_type_id' => $deluxeKing->id, 'status' => 'inspected'],
-            ['room_number' => '104', 'room_type_id' => $deluxeKing->id, 'status' => 'dirty'],
-            ['room_number' => '201', 'room_type_id' => $executiveSuite->id, 'status' => 'clean'],
-            ['room_number' => '202', 'room_type_id' => $executiveSuite->id, 'status' => 'clean'],
+        // Physical Rooms for Tembo Kiwengwa Resort
+        $tkrRooms = [
+            ['room_number' => '401', 'room_type_id' => $tkrDblBal->id, 'status' => 'clean'],
+            ['room_number' => '402', 'room_type_id' => $tkrTwinBal->id, 'status' => 'clean'],
+            ['room_number' => '403', 'room_type_id' => $tkrDblPat->id, 'status' => 'clean'],
+            ['room_number' => '501', 'room_type_id' => $tkrDblPrv->id, 'status' => 'inspected'],
+            ['room_number' => '502', 'room_type_id' => $tkrSteBal->id, 'status' => 'clean'],
+            ['room_number' => '601', 'room_type_id' => $tkrFamJac->id, 'status' => 'clean'],
+            ['room_number' => '602', 'room_type_id' => $tkrFamGdn->id, 'status' => 'dirty'],
         ];
 
-        foreach ($nairobiRooms as $rm) {
+        foreach ($tkrRooms as $rm) {
             Room::firstOrCreate(
-                ['property_id' => $propA->id, 'room_number' => $rm['room_number']],
-                [
-                    'ulid'         => (string) Str::ulid(),
-                    'room_type_id' => $rm['room_type_id'],
-                    'status'       => $rm['status'],
-                ]
+                ['property_id' => $propB->id, 'room_number' => $rm['room_number']],
+                ['ulid' => (string) Str::ulid(), 'room_type_id' => $rm['room_type_id'], 'status' => $rm['status']]
             );
         }
 
-        // ─── Rate Plans & Daily Rates for Nairobi ──────────────────────────
-        $barPlan = RatePlan::firstOrCreate(
+        // ─── Rate Plans & Daily Rates for Tembo House Hotel ──────────────────
+        $barPlanA = RatePlan::firstOrCreate(
             ['property_id' => $propA->id, 'code' => 'BAR'],
             [
                 'ulid'            => (string) Str::ulid(),
                 'organization_id' => $org->id,
                 'name'            => 'Best Available Rate',
-                'description'     => 'Standard flexible rate with free cancellation up to 24h before arrival.',
-                'currency'        => 'KES',
+                'description'     => 'Standard flexible direct booking rate with free cancellation up to 24h before arrival.',
+                'currency'        => 'USD',
                 'is_public'       => true,
                 'is_refundable'   => true,
                 'breakfast_included' => false,
@@ -285,15 +499,14 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $bbPlan = RatePlan::firstOrCreate(
+        $bbPlanA = RatePlan::firstOrCreate(
             ['property_id' => $propA->id, 'code' => 'BARBB'],
             [
                 'ulid'            => (string) Str::ulid(),
                 'organization_id' => $org->id,
                 'name'            => 'Bed & Breakfast Package',
-                'description'     => 'Includes full buffet breakfast daily for all registered guests.',
-                'currency'        => 'KES',
-                'meal_plan_id'    => MealPlan::where('code', 'BB')->first()?->id,
+                'description'     => 'Includes luxury buffet breakfast daily at Bahari Restaurant.',
+                'currency'        => 'USD',
                 'is_public'       => true,
                 'is_refundable'   => true,
                 'breakfast_included' => true,
@@ -301,32 +514,92 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $barPlan->roomTypes()->syncWithoutDetaching([$deluxeKing->id, $executiveSuite->id]);
-        $bbPlan->roomTypes()->syncWithoutDetaching([$deluxeKing->id, $executiveSuite->id]);
+        $thhTypes = [$thhDeluxe, $thhPres, $thhDbl, $thhTwin, $thhTriple, $thhFreddie];
+        $barPlanA->roomTypes()->syncWithoutDetaching(array_column($thhTypes, 'id'));
+        $bbPlanA->roomTypes()->syncWithoutDetaching(array_column($thhTypes, 'id'));
 
-        // Seed 30 days of rates
+        // Rates mapping for THH (USD)
+        $thhPrices = [
+            $thhDeluxe->id => 220,
+            $thhPres->id   => 450,
+            $thhDbl->id    => 180,
+            $thhTwin->id   => 180,
+            $thhTriple->id => 240,
+            $thhFreddie->id=> 350,
+        ];
+
         for ($i = 0; $i < 30; $i++) {
             $date = now()->addDays($i)->toDateString();
+            foreach ($thhPrices as $rtId => $basePrice) {
+                RateDay::updateOrCreate(
+                    ['property_id' => $propA->id, 'rate_plan_id' => $barPlanA->id, 'room_type_id' => $rtId, 'date' => $date],
+                    ['amount_minor' => $basePrice * 100, 'currency' => 'USD']
+                );
+                RateDay::updateOrCreate(
+                    ['property_id' => $propA->id, 'rate_plan_id' => $bbPlanA->id, 'room_type_id' => $rtId, 'date' => $date],
+                    ['amount_minor' => ($basePrice + 25) * 100, 'currency' => 'USD']
+                );
+            }
+        }
 
-            // Deluxe King: 15,000 KES BAR, 18,000 KES BB
-            RateDay::updateOrCreate(
-                ['property_id' => $propA->id, 'rate_plan_id' => $barPlan->id, 'room_type_id' => $deluxeKing->id, 'date' => $date],
-                ['amount_minor' => 1500000, 'currency' => 'KES']
-            );
-            RateDay::updateOrCreate(
-                ['property_id' => $propA->id, 'rate_plan_id' => $bbPlan->id, 'room_type_id' => $deluxeKing->id, 'date' => $date],
-                ['amount_minor' => 1800000, 'currency' => 'KES']
-            );
+        // ─── Rate Plans & Daily Rates for Tembo Kiwengwa Resort ─────────────
+        $barPlanB = RatePlan::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'BAR'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Best Available Rate',
+                'description'     => 'Standard flexible direct booking rate with free cancellation.',
+                'currency'        => 'USD',
+                'is_public'       => true,
+                'is_refundable'   => true,
+                'breakfast_included' => false,
+                'is_active'       => true,
+            ]
+        );
 
-            // Executive Suite: 30,000 KES BAR, 33,000 KES BB
-            RateDay::updateOrCreate(
-                ['property_id' => $propA->id, 'rate_plan_id' => $barPlan->id, 'room_type_id' => $executiveSuite->id, 'date' => $date],
-                ['amount_minor' => 3000000, 'currency' => 'KES']
-            );
-            RateDay::updateOrCreate(
-                ['property_id' => $propA->id, 'rate_plan_id' => $bbPlan->id, 'room_type_id' => $executiveSuite->id, 'date' => $date],
-                ['amount_minor' => 3300000, 'currency' => 'KES']
-            );
+        $bbPlanB = RatePlan::firstOrCreate(
+            ['property_id' => $propB->id, 'code' => 'BARBB'],
+            [
+                'ulid'            => (string) Str::ulid(),
+                'organization_id' => $org->id,
+                'name'            => 'Bed & Breakfast Package',
+                'description'     => 'Includes luxury buffet breakfast daily at Sea Salt Restaurant.',
+                'currency'        => 'USD',
+                'is_public'       => true,
+                'is_refundable'   => true,
+                'breakfast_included' => true,
+                'is_active'       => true,
+            ]
+        );
+
+        $tkrTypes = [$tkrDblBal, $tkrTwinBal, $tkrDblPat, $tkrDblPrv, $tkrSteBal, $tkrFamJac, $tkrFamGdn];
+        $barPlanB->roomTypes()->syncWithoutDetaching(array_column($tkrTypes, 'id'));
+        $bbPlanB->roomTypes()->syncWithoutDetaching(array_column($tkrTypes, 'id'));
+
+        // Rates mapping for TKR (USD)
+        $tkrPrices = [
+            $tkrDblBal->id => 250,
+            $tkrTwinBal->id=> 250,
+            $tkrDblPat->id => 320,
+            $tkrDblPrv->id => 390,
+            $tkrSteBal->id => 480,
+            $tkrFamJac->id => 420,
+            $tkrFamGdn->id => 310,
+        ];
+
+        for ($i = 0; $i < 30; $i++) {
+            $date = now()->addDays($i)->toDateString();
+            foreach ($tkrPrices as $rtId => $basePrice) {
+                RateDay::updateOrCreate(
+                    ['property_id' => $propB->id, 'rate_plan_id' => $barPlanB->id, 'room_type_id' => $rtId, 'date' => $date],
+                    ['amount_minor' => $basePrice * 100, 'currency' => 'USD']
+                );
+                RateDay::updateOrCreate(
+                    ['property_id' => $propB->id, 'rate_plan_id' => $bbPlanB->id, 'room_type_id' => $rtId, 'date' => $date],
+                    ['amount_minor' => ($basePrice + 30) * 100, 'currency' => 'USD']
+                );
+            }
         }
 
         // ─── Taxes for Nairobi ─────────────────────────────────────────────
@@ -364,8 +637,8 @@ class DatabaseSeeder extends Seeder
         if (\App\Infrastructure\Persistence\Reservation::where('property_id', $propA->id)->count() === 0) {
             $res1 = $createReservationAction->execute([
                 'property_id'      => $propA->id,
-                'room_type_id'     => $deluxeKing->id,
-                'rate_plan_id'     => $barPlan->id,
+                'room_type_id'     => $thhDeluxe->id,
+                'rate_plan_id'     => $barPlanA->id,
                 'check_in'         => now()->addDays(2)->toDateString(),
                 'check_out'        => now()->addDays(5)->toDateString(),
                 'adults'           => 2,
@@ -380,8 +653,8 @@ class DatabaseSeeder extends Seeder
 
             $res2 = $createReservationAction->execute([
                 'property_id'      => $propA->id,
-                'room_type_id'     => $executiveSuite->id,
-                'rate_plan_id'     => $bbPlan->id,
+                'room_type_id'     => $thhPres->id,
+                'rate_plan_id'     => $bbPlanA->id,
                 'check_in'         => now()->addDays(4)->toDateString(),
                 'check_out'        => now()->addDays(7)->toDateString(),
                 'adults'           => 2,
