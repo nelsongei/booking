@@ -88,10 +88,10 @@
             --primary-dark: {{ isset($property) ? $property->getDarkColor() : '#0f172a' }};
             --primary-obsidian: {{ isset($property) ? $property->getDarkColor() : '#0b0f19' }};
             --brand-gold: {{ isset($property) ? $property->getPrimaryColor() : '#c5a059' }};
-            --brand-gold-light: rgba(197, 160, 89, 0.12);
+            --brand-gold-light: {{ isset($property) ? $property->getPrimaryColor() . '1a' : 'rgba(197, 160, 89, 0.12)' }};
             --brand-gold-hover: {{ isset($property) ? $property->getPrimaryColor() : '#b38e46' }};
             --brand-accent: {{ isset($property) ? $property->getPrimaryColor() : '#c5a059' }};
-            --brand-accent-hover: {{ isset($property) ? $property->getAccentColor() : '#b8de28' }};
+            --brand-accent-hover: {{ isset($property) ? $property->getPrimaryColor() : '#b38e46' }};
             --bg-canvas: #f8fafc;
             --card-bg: #ffffff;
             --card-border: #e2e8f0;
@@ -124,7 +124,7 @@
 
         /* ===== ENTERPRISE NAVBAR ===== */
         .navbar-guest {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
@@ -135,7 +135,7 @@
 
         .brand-logo-box {
             width: 44px; height: 44px;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, #1e293b 100%);
+            background: var(--primary-dark);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
@@ -161,8 +161,8 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--brand-gold);
-            background: var(--brand-gold-light);
+            color: #ffffff;
+            background: var(--brand-gold);
             padding: 2px 8px;
             border-radius: 6px;
             margin-left: 8px;
@@ -224,8 +224,8 @@
 
         .step-item.active {
             color: var(--primary-dark);
-            background: rgba(204, 242, 53, 0.25);
-            border: 1px solid rgba(204, 242, 53, 0.6);
+            background: var(--brand-gold-light);
+            border: 1px solid var(--brand-gold);
         }
 
         .step-item.completed {
@@ -248,9 +248,9 @@
         }
 
         .step-item.active .step-number {
-            background: var(--brand-accent);
-            color: var(--primary-dark);
-            box-shadow: 0 0 12px rgba(204, 242, 53, 0.6);
+            background: var(--brand-gold);
+            color: #ffffff;
+            box-shadow: none;
             transform: scale(1.08);
         }
 
@@ -276,8 +276,7 @@
 
         /* ===== LUXURY HERO BANNER ===== */
         .hero-banner-premium {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(11, 15, 25, 0.82) 100%),
-                        url('/images/hero.png') center/cover no-repeat;
+            background: rgba(15, 23, 42, 0.82) url('/images/hero.png') center/cover no-repeat;
             color: #ffffff;
             border-radius: var(--radius-xl);
             padding: 56px 48px;
@@ -288,25 +287,14 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .hero-banner-premium::after {
-            content: '';
-            position: absolute;
-            bottom: -80px; right: -80px;
-            width: 320px; height: 320px;
-            background: radial-gradient(circle, rgba(204, 242, 53, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
         .hero-badge-star {
-            background: linear-gradient(135deg, var(--brand-accent) 0%, #a3e635 100%);
-            color: var(--primary-dark);
+            background: var(--brand-gold);
+            color: #ffffff;
             font-weight: 800;
             font-size: 0.78rem;
             letter-spacing: 0.04em;
             padding: 6px 16px;
             border-radius: var(--radius-pill);
-            box-shadow: 0 4px 14px rgba(204, 242, 53, 0.4);
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -314,8 +302,8 @@
 
         /* ===== BUTTONS ===== */
         .btn-brand {
-            background: linear-gradient(135deg, var(--brand-accent) 0%, #b8de28 100%);
-            color: var(--primary-dark);
+            background: var(--brand-gold);
+            color: #ffffff;
             font-weight: 800;
             font-size: 0.95rem;
             letter-spacing: -0.01em;
@@ -323,7 +311,7 @@
             padding: 13px 32px;
             border: none;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 6px 20px rgba(204, 242, 53, 0.38);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -331,10 +319,11 @@
         }
 
         .btn-brand:hover {
-            background: linear-gradient(135deg, #d8fa45 0%, #aee019 100%);
-            color: var(--primary-dark);
+            background: var(--brand-gold);
+            color: #ffffff;
+            opacity: 0.92;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(204, 242, 53, 0.55);
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
         }
 
         .btn-brand:active {
@@ -579,20 +568,13 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-expand-lg navbar-guest sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('booking.index', ['slug' => $property->slug ?? 'tembo-hotel']) }}">
-                <div class="brand-logo-box p-1 me-3 d-flex align-items-center justify-content-center" style="background: transparent; border: none; box-shadow: none; width: auto; height: 44px;">
+            <a class="navbar-brand d-flex align-items-center py-0" href="{{ route('booking.index', ['slug' => $property->slug ?? 'tembo-hotel']) }}">
+                <div class="brand-logo-box p-0 me-2 d-flex align-items-center justify-content-center" style="background: transparent; border: none; box-shadow: none; width: auto; height: 48px;">
                     @if(isset($property))
                         <img src="{{ $property->getLogoUrl('dark') }}" alt="{{ $property->name }}" style="max-height: 48px; width: auto; object-fit: contain;">
                     @else
                         <i class="fa-solid fa-crown text-warning fs-3"></i>
                     @endif
-                </div>
-                <div>
-                    <div class="d-flex align-items-center">
-                        <span class="brand-title">{{ $property->name ?? 'Tembo Hotel' }}</span>
-                        <span class="brand-badge">5-Star Luxury</span>
-                    </div>
-                    <small class="text-muted d-block" style="font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">Official Direct Booking Engine</small>
                 </div>
             </a>
             <div class="d-flex align-items-center gap-3 ms-auto">
@@ -651,7 +633,7 @@
         <div class="container">
             <div class="row g-4 mb-4">
                 <div class="col-lg-5">
-                    <div class="d-flex align-items-center mb-3 gap-3">
+                    <div class="d-flex align-items-center mb-3">
                         @if(isset($property))
                             <img src="{{ $property->getLogoUrl('light') }}" alt="{{ $property->name }}" style="max-height: 54px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));">
                         @else
@@ -659,7 +641,6 @@
                                 <i class="fa-solid fa-crown text-warning"></i>
                             </div>
                         @endif
-                        <span class="fs-4 fw-extrabold text-white">{{ $property->name ?? 'Tembo Hotel' }}</span>
                     </div>
                     <p class="text-white-50 small pe-lg-4">
                         Experience unparalleled hospitality and world-class luxury direct reservations with instant room hold confirmation, best-rate guarantee, and 24/7 guest concierge support.

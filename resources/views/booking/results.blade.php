@@ -102,7 +102,7 @@
             <div class="card-custom overflow-hidden shadow-md">
                 <div class="row g-0">
                     <!-- Room Thumbnail & Photo -->
-                    <div class="col-lg-5 position-relative bg-dark" style="min-height: 280px; background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), url('{{ $roomImage }}') center/cover no-repeat;">
+                    <div class="col-lg-5 position-relative bg-dark" style="min-height: 280px; background: url('{{ $roomImage }}') center/cover no-repeat;">
                         <span class="position-absolute top-0 start-0 m-3 badge bg-emerald-600 bg-success text-white rounded-pill px-3 py-2 fw-semibold shadow-sm">
                             <i class="fa-solid fa-check me-1"></i> {{ $minAvail }} {{ $minAvail == 1 ? 'Suite' : 'Suites' }} Available
                         </span>
