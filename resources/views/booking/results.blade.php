@@ -97,7 +97,7 @@
                 $rt = $item['room_type'];
                 $minAvail = $item['min_available'];
                 $plans = $item['rate_plans'];
-                $roomImage = ($index % 2 == 0) ? '/images/room_deluxe.png' : '/images/room_executive.png';
+                $roomImage = $rt->getImageUrl();
             @endphp
             <div class="card-custom overflow-hidden shadow-md">
                 <div class="row g-0">

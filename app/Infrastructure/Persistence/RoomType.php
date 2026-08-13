@@ -76,4 +76,23 @@ class RoomType extends Model
     {
         return $this->hasMany(RateDay::class);
     }
+
+    public function getImageUrl(): string
+    {
+        if ($this->relationLoaded('primaryImage') && $this->primaryImage && $this->primaryImage->path) {
+            return asset($this->primaryImage->path);
+        }
+
+        $prim = $this->primaryImage()->first();
+        if ($prim && $prim->path) {
+            return asset($prim->path);
+        }
+
+        $firstImg = $this->images()->first();
+        if ($firstImg && $firstImg->path) {
+            return asset($firstImg->path);
+        }
+
+        return asset('images/room_deluxe.png');
+    }
 }

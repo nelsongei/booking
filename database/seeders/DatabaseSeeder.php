@@ -631,6 +631,31 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // ─── Room Type Images ────────────────────────────────────────────────
+        $roomTypeImages = [
+            $thhDeluxe->id  => 'images/rooms/thh-deluxe.webp',
+            $thhPres->id    => 'images/rooms/thh-presidential.webp',
+            $thhDbl->id     => 'images/rooms/thh-double.webp',
+            $thhTwin->id    => 'images/rooms/thh-twin.webp',
+            $thhTriple->id  => 'images/rooms/thh-triple.webp',
+            $thhFreddie->id => 'images/rooms/thh-freddie.webp',
+
+            $tkrDblBal->id  => 'images/rooms/tkr-double-balcony.webp',
+            $tkrTwinBal->id => 'images/rooms/tkr-twin-balcony.webp',
+            $tkrDblPat->id  => 'images/rooms/tkr-double-patio.webp',
+            $tkrDblPrv->id  => 'images/rooms/tkr-double-private.webp',
+            $tkrSteBal->id  => 'images/rooms/tkr-suite-balcony.webp',
+            $tkrFamJac->id  => 'images/rooms/tkr-family-jacuzzi.webp',
+            $tkrFamGdn->id  => 'images/rooms/tkr-family-garden.webp',
+        ];
+
+        foreach ($roomTypeImages as $rtId => $imgPath) {
+            \App\Infrastructure\Persistence\RoomTypeImage::updateOrCreate(
+                ['room_type_id' => $rtId, 'is_primary' => true],
+                ['path' => $imgPath, 'alt_text' => 'Suite Photo', 'sort_order' => 1]
+            );
+        }
+
         // ─── Demo Reservations (Phase 4) ──────────────────────────────────
         $createReservationAction = app(CreateReservationAction::class);
 

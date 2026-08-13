@@ -1,0 +1,692 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tembo House Hotel | Seafront Boutique Hotel in Stone Town, Zanzibar</title>
+    <link href="https://fonts.cdnfonts.com/css/avenir-lt-pro" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://tembohotel.com/wp-content/themes/tembo-hotel/images/favicon.png" sizes="96x96"/>
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="shortcut icon" href="https://tembohotel.com/wp-content/themes/tembo-hotel/images/favicon.ico"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+          integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+    <link rel="stylesheet" href="https://tembohotel.com/wp-content/themes/tembo-hotel/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://tembohotel.com/wp-content/themes/tembo-hotel/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://tembohotel.com/wp-content/themes/tembo-hotel/css/style.css">
+</head>
+
+<body>
+<header>
+    <nav class="desktop-navigation-wrapper">
+        <div class="container-rigid">
+            <div class="desktop-navigation d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <a href="https://tembohotel.com/">
+                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/logo.png" alt="Tembo hotel logo">
+                    </a>
+                </div>
+                <ul class="d-flex gap-3">
+                    <li><a class="px-1" href="https://tembohotel.com/stay">STAY <i
+                                    class="fi fi-rs-angle-down"></i></a>
+                        <ul class="desktop-submenu">
+                                                                <li>
+                                        <a href="https://tembohotel.com/blog/stays/presidential-suites/">Presidential Suites</a>
+                                    </li>
+                                                                    <li>
+                                        <a href="https://tembohotel.com/blog/stays/deluxe-suites/">Deluxe Suites</a>
+                                    </li>
+                                                                    <li>
+                                        <a href="https://tembohotel.com/blog/stays/triple-rooms-with-balcony-sea-view/">Triple Rooms with Balcony &amp; Sea View</a>
+                                    </li>
+                                                                    <li>
+                                        <a href="https://tembohotel.com/blog/stays/twin-rooms-with-balcony-sea-view/">Twin Rooms with Balcony &amp; Sea View</a>
+                                    </li>
+                                                                    <li>
+                                        <a href="https://tembohotel.com/blog/stays/double-rooms-with-balcony-sea-view/">Double Rooms with Balcony &amp; Sea View</a>
+                                    </li>
+                                                                    <li>
+                                        <a href="https://tembohotel.com/blog/stays/freddie-mercury-apartments/">Freddie Mercury Apartments</a>
+                                    </li>
+                                                        </ul>
+                    </li>
+                    <li><a class="px-1" href="https://tembohotel.com/dining">DINING</a></li>
+                    <li><a class="px-1" href="https://tembohotel.com/history">HISTORY</a></li>
+                    <li><a class="px-1" href="https://tembohotel.com/attractions">ATTRACTIONS</a></li>
+                    <li><a class="px-1" href="https://tembohotel.com/gallery">GALLERY</a></li>
+                </ul>
+                <div class="book-now">
+                    <a href="#" target="_blank">BOOK
+                        NOW</a>
+                    <div class="ps-3 langauge-dropdown-wrapper">
+                        <button class="language dropdown-toggle select__link active" id="language-dropdown">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/en.png" alt="Flag Image">EN <i
+                                    class="fi fi-br-angle-down"></i>
+                        </button>
+                        <div class="language-submenu invest-submenu">
+                            <ul>
+                                <li>
+                                    <a href="https://tembohotel.com/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link active">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/en.png" alt="Flag Image">EN
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/fr/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link ">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/fr.png" alt="Flag Image">FR
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/ge/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/ger.png" alt="Flag Image">GER
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/sp/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/es.png" alt="Flag Image">ES
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/it/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/it.png" alt="Flag Image">IT
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <nav class="mobile-navigation-wrapper">
+        <div class="container-rigid">
+            <div class="mobile-header d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <a href="https://tembohotel.com/"><img
+                                src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/logo.png" alt="Tembo hotel logo"></a>
+                </div>
+                <div class="mobile-right d-flex align-items-center">
+                    <div class="pe-2 pe-md-3 me-1 me-sm-2 langauge-dropdown-wrapper">
+                        <button class="language dropdown-toggle select__link active" id="language-dropdown">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/en.png" alt="Flag Image">EN <i
+                                    class="fi fi-br-angle-down"></i>
+                        </button>
+                        <div class="language-submenu invest-submenu">
+                            <ul>
+                                <li>
+                                    <a href="https://tembohotel.com/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link active">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/en.png" alt="Flag Image">EN
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/fr/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link ">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/fr.png" alt="Flag Image">FR
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/ge/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/ger.png" alt="Flag Image">GER
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/sp/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/es.png" alt="Flag Image">ES
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tembohotel.com/it/wp-content/themes/tembo-hotel/images/double-suite-banner.webp" class="select__link">
+                                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/assets/images/it.png" alt="Flag Image">IT
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu-toggle" id="menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <div class="d-flex align-items-center justify-content-between flex-column h-100">
+                    <ul class="w-100">
+                        <li class="has-submenu">
+                            <a href="https://tembohotel.com/stay"
+                               class="">
+                                STAY <i class="fi fi-rs-angle-down"></i>
+                            </a>
+                            <ul class="mobile-submenu">
+                                                                        <li>
+                                            <a href="https://tembohotel.com/blog/stays/presidential-suites/"
+                                               class="">
+                                                Presidential Suites                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://tembohotel.com/blog/stays/deluxe-suites/"
+                                               class="">
+                                                Deluxe Suites                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://tembohotel.com/blog/stays/triple-rooms-with-balcony-sea-view/"
+                                               class="">
+                                                Triple Rooms with Balcony &amp; Sea View                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://tembohotel.com/blog/stays/twin-rooms-with-balcony-sea-view/"
+                                               class="">
+                                                Twin Rooms with Balcony &amp; Sea View                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://tembohotel.com/blog/stays/double-rooms-with-balcony-sea-view/"
+                                               class="">
+                                                Double Rooms with Balcony &amp; Sea View                                            </a>
+                                        </li>
+                                                                            <li>
+                                            <a href="https://tembohotel.com/blog/stays/freddie-mercury-apartments/"
+                                               class="">
+                                                Freddie Mercury Apartments                                            </a>
+                                        </li>
+                                                                </ul>
+                        </li>
+
+                        <li>
+                            <a class=""
+                               href="https://tembohotel.com/dining">
+                                DINING
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class=""
+                               href="https://tembohotel.com/history">
+                                HISTORY
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class=""
+                               href="https://tembohotel.com/attractions">
+                                ATTRACTIONS
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class=""
+                               href="https://tembohotel.com/gallery">
+                                GALLERY
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="book-now mt-4 pt-0 pt-md-3">
+                        <a href="#" target="_blank">BOOK
+                            NOW</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+    <main class="homepage-wrapper">
+        <section class="home-banner-wrapper">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-banner1.webp" alt="Brand 1"></div>
+                    <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-banner2.webp" alt="Brand 2"></div>
+                    <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-banner3.webp" alt="Brand 3"></div>
+                    <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-banner4.webp" alt="Brand 4"></div>
+                    <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-banner5.webp" alt="Brand 5"></div>
+                    <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-banner6.webp" alt="Brand 6"></div>
+                </div>
+                
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="home-banner-content d-flex align-items-center">
+                <div class="container-rigid d-flex flex-column align-items-center">
+                    <h1 class="text-center pt-2 pt-lg-5 pb-2 px-1 px-md-4 px-lg-5">Discover Zanzibar’s Hidden Jewel</h1>
+                    <p class="text-center pt-2 pb-2 px-1 px-md-4 px-lg-5">
+                        Welcome to <strong>Tembo House Hotel</strong>, a sanctuary of elegance where Swahili charm meets
+                        world-class comfort.
+                        <span class="d-none d-lg-inline">Nestled along Zanzibar’s pristine white sands, our beachfront oasis invites you to bask in the
+                        sun, indulge in gourmet cuisine, and experience the magic of island life—refined to perfection.</span>
+                    </p>
+                    <div class="banner-links d-flex gap-3 justify-content-center pt-2 pb-3 flex-wrap">
+                        <a href="https://tembohotel.com/stay">Explore Our Suites</a>
+                        <a href="#" target="_blank">Check
+                            Availability</a>
+                    </div>
+                    <div class="banner-tripadvisor d-flex justify-content-center pt-2">
+                        <a href="https://www.tripadvisor.com/Hotel_Review-g488129-d593744-Reviews-Tembo_House_Hotel-Stone_Town_Zanzibar_City_Zanzibar_Island_Zanzibar_Archipelago.html"
+                            target="_blank">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/tripadvisor.webp" loading="lazy" alt="tripadvisor">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="home-intro-wrapper">
+            <div class="container-fluid">
+                <div class="container-rigid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h2 class="pb-2 pt-2 text-center text-lg-start">Zanzibar’s<br
+                                    class="d-none d-lg-inline-block"> Historical Gem </h2>
+                        </div>
+                        <div class="col-lg-8">
+                            <p class="ps-0 ps-lg-4">
+                                As the first beachfront hotel within the UNESCO Heritage Site of Stone Town, Tembo House
+                                Hotel has always been one of Zanzibar’s finest hospitality gems. The hotel has welcomed
+                                and wowed guests since 1994 and continues to add to the unique history of this island.
+                                The ideal location of Tembo House Hotel means you can easily access the mazy streets of
+                                Stone Town to explore the Peace Memorial Museum, the Palace Museum, Forodhani Gardens,
+                                the Old Fort, Tippu Tip’s house and all the wonders of the ancient town. By hosting you
+                                at Tembo, we continue our great legacy in satisfying guests such as Mahatma Gandhi,
+                                Indira Gandhi, Freddie Mercury, Henry Morton Stanley, Ludwig Krapf and more. Karibu
+                                Tembo!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-video-wrapper">
+            <img id="video-placeholder" src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/placeholder.webp" alt="Custom Thumbnail" title="Click to play" />
+            <video id="background-video" muted loop playsinline preload="auto">
+                <source src="https://tembohotel.com/wp-content/themes/tembo-hotel/videos/TEMBO BEACH FRONT - YouTube.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="video-overlay">
+                <div class="overlay-content">
+                    <h2>Discover Our Luxury Rooms & Suites</h2>
+                    <p class="pt-2 pt-lg-2 pb-2 pb-lg-3">
+                        Every room in Tembo House Hotel has its own unique character and allure. Whether you seek
+                        tailored service or a serene escape, Tembo House Living combines convenience with tranquility,
+                        making every stay feel effortlessly like home.
+                    </p>
+                    <a href="https://tembohotel.com/stay">View Accommodations <i class="fi fi-rs-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-service-wrapper">
+            <div class="home-service home-service-left">
+                <div class="home-service-content">
+                    <h3>History of Tembo House Hotel</h3>
+                    <p class="pt-2 pt-lg-3 pb-3 pb-lg-4">
+                        Tembo House Hotel is a legacy of great history and one of Zanzibar's foremost witnesses
+                        throughout its growth. The building that today is the Tembo House Hotel has lived through much
+                        of Zanzibar’s modern history and housed some of its most famous guests.
+                    </p>
+                    <a href="" class="d-flex align-items-center">Explore More <i
+                            class="fi fi-rs-arrow-right ps-1 ms-2"></i></a>
+                </div>
+                <div class="home-service-image">
+                    <div class="swiper attractionSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-service2.webp" alt="Brand 1"></div>
+                            <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/histo2.webp" alt="Brand 2"></div>
+                            <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/histo1.webp" alt="Brand 3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="home-service home-service-right">
+                <div class="home-service-image">
+                    <div class="swiper attractionSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/attraction1.webp" alt="Brand 1"></div>
+                            <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/attraction2.webp" alt="Brand 2"></div>
+                            <div class="swiper-slide"><img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/attraction3.webp" alt="Brand 3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="home-service-content">
+                    <h3>Attractions</h3>
+                    <p class="pt-2 pt-lg-3 pb-3 pb-lg-4">
+                        Tembo's ideal location in Zanzibar gives you a perfect launchpad to all the exciting locations
+                        on the island. From boat rides to exotic islands, a drive to the spice farms or a quick walk
+                        around Stone Town, at Tembo you can do it all.
+                    </p>
+                    <a href="" class="d-flex align-items-center">Explore More <i
+                            class="fi fi-rs-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-aminities-wrapper">
+            <div class="home-aminities-intro">
+                <div class="container-rigid">
+                    <h2 class="pb-1 pb-md-2">Experience Tembo hotel Aminities</h2>
+                    <p>
+                        At Tembo House Hotel, we offer a thoughtfully curated selection of amenities to enhance your
+                        stay. Enjoy leisure and entertainment in our private cinema, complete with a snack bar. Unwind
+                        by the swimming pool or stroll through our lush gardens, perfect for quiet reflection or
+                        gatherings. Our well-equipped gym offers a private, energetic space. Each amenity is designed to
+                        provide a comprehensive and refined experience.
+                    </p>
+                </div>
+            </div>
+
+            <div class="home-aminities-slider">
+                <div class="slick-slider-wrapper">
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity3.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Outdoor swimming pool</h4>
+                                <p>
+                                    Catch the sunset from our first-floor infinity plunge pool or dive into the larger
+                                    azure pool at the heart of the hotel—just steps from the ocean.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity4.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Tropical garden courtyard</h4>
+                                <p>
+                                    Escape to our tranquil courtyard, where lush tropical plants, swaying palms, and
+                                    Zanzibari charm create a peaceful oasis. It's the perfect spot to unwind, sip
+                                    coffee, or
+                                    simply enjoy the island breeze.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity1.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Beachfront access with private beach area</h4>
+                                <p>
+                                    Step straight onto the sand with direct beachfront access and a private beach area
+                                    reserved just for our guests — perfect for sunbathing, swimming, or sunset strolls.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity2.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Terrace and sun loungers</h4>
+                                <p>
+                                    Relax on our open-air terrace, complete with comfortable sun loungers—ideal for
+                                    soaking
+                                    up the sun or enjoying ocean views in total comfort.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity3.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Outdoor swimming pool</h4>
+                                <p>
+                                    Catch the sunset from our first-floor infinity plunge pool or dive into the larger
+                                    azure
+                                    pool at the heart of the hotel—just steps from the ocean. 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity4.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Tropical garden courtyard</h4>
+                                <p>
+                                    Escape to our tranquil courtyard, where lush tropical plants, swaying palms, and
+                                    Zanzibari charm create a peaceful oasis. It's the perfect spot to unwind, sip
+                                    coffee, or
+                                    simply enjoy the island breeze.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity1.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Beachfront access with private beach area</h4>
+                                <p>
+                                    Step straight onto the sand with direct beachfront access and a private beach area
+                                    reserved just for our guests — perfect for sunbathing, swimming, or sunset strolls.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="amenity-slide">
+                        <div class="amenity-slide-content">
+                            <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/amenity2.webp" alt="">
+                            <div class="amenity-content">
+                                <h4>Terrace and sun loungers</h4>
+                                <p>
+                                    Relax on our open-air terrace, complete with comfortable sun loungers—ideal for
+                                    soaking
+                                    up the sun or enjoying ocean views in total comfort.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="feedback-section home-testimonials-wrapper">
+            <div class="container-rigid">
+                <h2 class="section-title text-center">Guest Testimonials</h2>
+                <div class="swiper feedback-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide feedback-card">
+                            <p class="feedback-text">❝ Such a beautiful experience. I stayed there a whole week. The
+                                food
+                                is amazing and the staff are great. My Yusuf the manager is a very warm and welcoming
+                                person and cares about the comfort of his clients. Well done Tembo. ❞</p>
+                            <p class="feedback-author">James M., <span>Business Traveler</span></p>
+                        </div>
+                        <div class="swiper-slide feedback-card">
+                            <p class="feedback-text">
+                                ❝ Amazing studio located in a nice quiet area but close to everything. The room is so
+                                spacious, the bed was comfortable all the facilities in the room were great. Beautiful
+                                view I didn’t expect to be able to see the sea ! 100% recommend this hotel ❞
+                            </p>
+                            <p class="feedback-author">Sarah L., <span>Leisure Guest</span></p>
+                        </div>
+                        <div class="swiper-slide feedback-card">
+                            <p class="feedback-text">
+                                ❝ Very charming hotel. The staff was excellent. My room was a sea view room with a
+                                balcony. I had a partial view of the sea only after walking out to the balcony. ❞
+                            </p>
+                            <p class="feedback-author">Alex Timami, <span>Returning Guest</span></p>
+                        </div>
+                        <div class="swiper-slide feedback-card">
+                            <p class="feedback-text">
+                                ❝ Exceptional stay! Smooth check-in, friendly staff, and a spotless, spacious room with
+                                all the essentials. Housekeeping was consistently excellent. ❞
+                            </p>
+                            <p class="feedback-author">James M., <span>Business Traveler</span></p>
+                        </div>
+                        <div class="swiper-slide feedback-card">
+                            <p class="feedback-text">
+                                ❝ Charming colonial hotel. Room was spacious, very comfortable, well-appointed and
+                                clean. The three pools were excellent. On the beach right in the middle of Stone Town.
+                                Staff was excellent. ❞
+                            </p>
+                            <p class="feedback-author">Sarah L., <span>Leisure Guest</span></p>
+                        </div>
+                        <div class="swiper-slide feedback-card">
+                            <p class="feedback-text">
+                                ❝ This hotel is prob the best value in all of Stone Town. Breakfast buffet is top notch
+                                & the views are incredible. Live music at night & next door to another place that has
+                                live music. Perfect walking distance to town. ❞
+                            </p>
+                            <p class="feedback-author">Alex Timami, <span>Returning Guest</span></p>
+                        </div>
+
+                        <!-- Add more slides as needed -->
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="home-dine-wrapper">
+            <div class="home-dine">
+                <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/home-restaurant.webp" alt="">
+                <div class="home-dine-content">
+                    <div class="container-rigid d-flex flex-column align-items-center">
+                        <h2>Dine at Bahari Restaurant</h2>
+                        <p>
+                            Savor Zanzibar’s flavors with a modern twist at our oceanfront restaurant. Enjoy fresh
+                            seafood, island spices, global flair, and unforgettable sunsets.
+                        </p>
+                        <div class="home-dine-links">
+                            <a href="">View Our Menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+<footer>
+    <div class="footer-newsletter-wrapper">
+        <div class="container-rigid">
+            <div class="footer-newsletter">
+                <h3>Join the Family</h3>
+                <p class="pt-1 pb-2 pb-md-3">Sign up for our newsletter to learn more about Tembo House Hotel and
+                    all of our efforts and adventures.</p>
+                <form action="">
+                    <div class="input-group">
+                        <label for="f-name">Full Name</label>
+                        <input type="text" name="" id="f-name">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" name="" id="email">
+                    </div>
+                    <button type="submit" class="d-flex">Subscribe <i
+                            class="fi fi-rs-arrow-right ms-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-main-wrapper w-100 float-start">
+        <div class="container-rigid">
+            <div class="footer-main">
+                <div class="footer-column footer-column1">
+                    <div class="footer-logo">
+                        <img src="https://tembohotel.com/wp-content/themes/tembo-hotel/images/logo-footer.webp" alt="">
+                    </div>
+                    <p class="py-2">P.O. BOX 3974 Shangani, Zanzibar Stonetown</p>
+                    <a href="https://wa.me/255777413348" target="_blank" class="float-start w-100">
+                        <i class="fa-brands fa-whatsapp me-2 fs-5"></i> +255 777 413 348
+                    </a>
+                    <div class="w-100 float-start d-flex py-3 align-items-center">
+                        <i class="fa-solid fa-phone me-2 fs-5 text-light"></i>
+                        <div class="d-flex w-100 flex-wrap float-start">
+                            <a href="tel:+255 779 413 348" class="">+255 779 413 348</a> <span class="px-1 text-light"> /</span>
+                            <a href="tel:+255 24 223 3005" class=""> +255 24 223 3005</a> <span class="px-1 text-light">/</span>
+                            <a href="tel:+255 24 223 069" class="">+255 24 223 069</a>
+                        </div>
+                    </div>
+                    <a href="mailto:reservations@tembohotel.com" class="float-start w-100 d-flex align-items-center"><i class="fi fi-rr-envelope me-2 fs-5"></i> reservations@tembohotel.com</a>
+
+                </div>
+                <div class="footer-column footer-column2">
+                    <h2>Quick Links</h2>
+                    <ul>
+                        <li><a href="https://tembohotel.com/stay">Book a Stay</a></li>
+                        <li><a href="https://tembohotel.com/dining">Dining</a></li>
+                        <li><a href="https://tembohotel.com/history">History</a></li>
+                        <li><a href="https://tembohotel.com/attractions">Attractions</a></li>
+                        <li><a href="https://tembohotel.com/gallery">Gallery</a></li>
+                        <li><a href="">Contact Us</a></li>
+                    </ul>
+
+                </div>
+                <div class="footer-column footer-column3">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.766155028457!2d39.18644216177584!3d-6.162064762311432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185cd05b1876df77%3A0x9fc081ffa152afd9!2sTembo%20House%20Hotel!5e0!3m2!1sen!2ske!4v1753585649580!5m2!1sen!2ske"
+                        width="" height="" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom-wrapper w-100 float-start py-3">
+        <div class="container-rigid">
+            <div class="footer-bottom d-flex justify-content-between align-items-center">
+                <p>Copyright © 2025 | TEMBO HOTEL.</p>
+                <ul class="bottom-links d-flex gap-4 align-items-center">
+                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="">Terms and Conditions</a></li>
+                </ul>
+                <ul class="footer-socials d-flex gap-3 align-items-center">
+                    <li><a href="" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href="" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Call & WhatsApp Buttons -->
+    <div class="sticky-contact-buttons">
+        <a href="tel:+255779413348" class="sticky-btn sticky-call" title="Call Us">
+            <i class="fa-solid fa-phone"></i>
+        </a>
+        <a href="https://wa.me/255777413348" target="_blank" class="sticky-btn sticky-whatsapp" title="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+    <!-- End Sticky Buttons -->
+
+</footer>
+
+
+<script src="https://tembohotel.com/wp-content/themes/tembo-hotel/js/jquery-3.6.0.min.js"></script>
+<script src="https://tembohotel.com/wp-content/themes/tembo-hotel/js/slick.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://tembohotel.com/wp-content/themes/tembo-hotel/js/bootstrap.bundle.min.js"></script>
+<script src="https://tembohotel.com/wp-content/themes/tembo-hotel/js/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://tembohotel.com/wp-content/themes/tembo-hotel/js/script.js"></script>
+
+</body>
+
+</html>
