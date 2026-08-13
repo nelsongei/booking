@@ -18,7 +18,7 @@
                     <label class="form-label fw-semibold text-dark">Confirmation Number</label>
                     <div class="input-group">
                         <span class="input-group-text bg-light"><i class="fa-solid fa-hashtag text-muted"></i></span>
-                        <input type="text" name="confirmation_number" class="form-control form-control-lg text-uppercase" placeholder="e.g. SH001-202608-X89F" value="{{ old('confirmation_number') }}" required>
+                        <input type="text" name="confirmation_number" class="form-control form-control-lg text-uppercase" placeholder="e.g. TH001-202608-X89F" value="{{ old('confirmation_number') }}" required>
                     </div>
                 </div>
 

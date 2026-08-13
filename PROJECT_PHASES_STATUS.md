@@ -79,7 +79,7 @@ The **Hotel Booking & PMS Platform** is structured into 13 distinct phases. **AL
 - [x] Migrations: `guest_profiles`, `booking_sources`, `reservations`, `reservation_rooms`, `reservation_nights`, `reservation_status_history`, `reservation_notes`, `reservation_addons`.
 - [x] Eloquent models: `GuestProfile`, `BookingSource`, `Reservation`, `ReservationRoom`, `ReservationNight`, `ReservationStatusHistory`, `ReservationNote`.
 - [x] Domain Core:
-  - `ConfirmationNumberGenerator`: Human-readable property-coded confirmation numbers (e.g., `SH001-202608-X89F`).
+  - `ConfirmationNumberGenerator`: Human-readable property-coded confirmation numbers (e.g., `TH001-202608-X89F`).
   - `ReservationStateMachine`: Valid state transition enforcement (`inquiry` → `held` → `confirmed` → `checked_in` → `checked_out`, or `cancelled` / `no_show`) with history logging.
   - `CreateReservationAction`: Transactional booking creation, guest profile resolution, pricing calculation, and inventory locking (`sold` count increment).
   - `CancelReservationAction`: Transactional cancellation, inventory release (`sold` count decrement), and audit logging.
