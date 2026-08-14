@@ -18,14 +18,24 @@ class SetCurrentProperty
 
         if ($user) {
             $propertyId = session('current_property_id');
+            $property   = null;
 
             if ($propertyId) {
                 $property = \App\Infrastructure\Persistence\Property::find($propertyId);
+            }
 
-                if ($property && $user->canAccessProperty($property)) {
-                    app()->instance('current.property', $property);
-                    $request->attributes->set('current_property', $property);
+            if (!$property || !$user->canAccessProperty($property)) {
+                $property = \App\Infrastructure\Persistence\Property::whereHas('organization', fn($q) => $q->where('id', $user->organization_id))->first()
+                    ?? \App\Infrastructure\Persistence\Property::first();
+
+                if ($property) {
+                    session(['current_property_id' => $property->id]);
                 }
+            }
+
+            if ($property && $user->canAccessProperty($property)) {
+                app()->instance('current.property', $property);
+                $request->attributes->set('current_property', $property);
             }
 
             app()->instance('current.user', $user);

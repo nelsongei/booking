@@ -23,6 +23,14 @@ class DashboardController extends Controller
         $user     = auth()->user();
         $property = app()->bound('current.property') ? app('current.property') : null;
 
+        if (!$property && $user) {
+            $property = Property::whereHas('organization', fn($q) => $q->where('id', $user->organization_id))->first() ?? Property::first();
+            if ($property) {
+                session(['current_property_id' => $property->id]);
+                app()->instance('current.property', $property);
+            }
+        }
+
         $stats = [
             'arrivals_today'     => 0,
             'departures_today'   => 0,
@@ -35,11 +43,20 @@ class DashboardController extends Controller
             'rooms_reserved'     => 0,
             'rooms_available'    => 0,
             'rooms_not_ready'    => 0,
+            'revpar'             => 0,
+            'adr'                => 0,
+            'active_holds'       => 0,
+            'unpaid_balance'     => 0,
         ];
 
         $chartLabels        = [];
         $chartRevenueData   = [];
+        $roomTypeLabels     = [];
+        $roomTypeCounts     = [];
+        $channelLabels      = [];
+        $channelCounts      = [];
         $recentReservations = collect();
+        $recentPayments     = collect();
 
         if ($property) {
             $today = now($property->timezone)->toDateString();
