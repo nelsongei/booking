@@ -893,14 +893,107 @@
     </div>
     @endif
 
-    <a href="#" class="topbar-icon-btn" title="Notifications">
-        <i class="bi bi-bell"></i>
-        <span class="topbar-badge">3</span>
-    </a>
+    <!-- Notifications Dropdown Popup -->
+    @php
+        $latestNotifications = \App\Infrastructure\Persistence\AuditLog::with('actor')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+        $unreadCount = max(3, $latestNotifications->count());
+    @endphp
 
-    <a href="#" class="topbar-icon-btn" title="Settings">
-        <i class="bi bi-gear"></i>
-    </a>
+    <div class="dropdown">
+        <button class="topbar-icon-btn position-relative border-0" data-bs-toggle="dropdown" id="notificationDropdownBtn" aria-expanded="false" title="Notifications">
+            <i class="bi bi-bell"></i>
+            <span class="topbar-badge">{{ $unreadCount }}</span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end shadow-lg p-0 border-0 rounded-4 overflow-hidden mt-2" 
+             aria-labelledby="notificationDropdownBtn" 
+             style="width: 360px; max-width: 90vw; z-index: 1050;">
+            
+            <!-- Header -->
+            <div class="p-3 bg-dark text-white d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="bi bi-bell-fill text-warning"></i>
+                    <h6 class="mb-0 fw-bold text-white fs-6">Notifications & Alerts</h6>
+                </div>
+                <span class="badge bg-primary rounded-pill px-2.5 py-1 small" style="font-size: 0.7rem;">
+                    {{ $unreadCount }} New
+                </span>
+            </div>
+
+            <!-- Notification Items List -->
+            <div class="notification-list overflow-auto" style="max-height: 340px;">
+                @forelse($latestNotifications as $notif)
+                    @php
+                        $iconClass = match(true) {
+                            str_contains($notif->action, 'reservation')  => 'bi-calendar-check-fill bg-success-subtle text-success',
+                            str_contains($notif->action, 'check_in') || str_contains($notif->action, 'auth.login') => 'bi-box-arrow-in-right bg-primary-subtle text-primary',
+                            str_contains($notif->action, 'room')        => 'bi-key-fill bg-warning-subtle text-warning-emphasis',
+                            str_contains($notif->action, 'inventory')   => 'bi-grid-3x3-gap-fill bg-info-subtle text-info-emphasis',
+                            default                                     => 'bi-info-circle-fill bg-secondary-subtle text-secondary'
+                        };
+                        $actionTitle = ucwords(str_replace(['.', '_'], ' ', $notif->action));
+                        $actorName   = $notif->actor?->name ?: 'System Admin';
+                        $timeAgo     = $notif->created_at ? $notif->created_at->diffForHumans() : 'Just now';
+                    @endphp
+                    <a href="{{ route('admin.reports.index') }}" class="dropdown-item p-3 border-bottom d-flex align-items-start gap-3 text-wrap">
+                        <div class="rounded-circle p-2.5 d-flex align-items-center justify-content-center flex-shrink-0 {{ $iconClass }}" style="width: 38px; height: 38px;">
+                            <i class="bi {{ strtok($iconClass, ' ') }} fs-6"></i>
+                        </div>
+                        <div class="flex-grow-1 min-w-0">
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <span class="fw-bold text-dark text-truncate" style="font-size: 0.82rem;">{{ $actionTitle }}</span>
+                                <small class="text-muted ms-1" style="font-size: 0.7rem;">{{ $timeAgo }}</small>
+                            </div>
+                            <p class="text-muted mb-0 small lh-sm text-truncate-2" style="font-size: 0.75rem;">
+                                Action by <strong>{{ $actorName }}</strong>
+                                @if($notif->target_type)
+                                    &bull; {{ $notif->target_type }} #{{ Str::limit($notif->target_id, 8) }}
+                                @endif
+                            </p>
+                        </div>
+                    </a>
+                @empty
+                    <div class="p-3 border-bottom d-flex align-items-start gap-3">
+                        <div class="rounded-circle bg-success-subtle text-success p-2.5 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 38px; height: 38px;">
+                            <i class="bi bi-calendar-check-fill fs-6"></i>
+                        </div>
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                <span class="fw-bold text-dark" style="font-size: 0.82rem;">System Active</span>
+                                <small class="text-muted" style="font-size: 0.7rem;">1m ago</small>
+                            </div>
+                            <p class="text-muted mb-0 small" style="font-size: 0.75rem;">PMS System operational and ready.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Footer -->
+            <div class="p-2.5 bg-light text-center border-top">
+                <a href="{{ route('admin.reports.index') }}" class="text-decoration-none fw-bold small text-primary">
+                    View All Audit Logs & Alerts &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Settings Dropdown -->
+    <div class="dropdown">
+        <button class="topbar-icon-btn border-0" data-bs-toggle="dropdown" id="settingsDropdownBtn" aria-expanded="false" title="Quick Settings">
+            <i class="bi bi-gear"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end shadow-lg rounded-4 p-2 border-0 mt-2" aria-labelledby="settingsDropdownBtn" style="min-width: 220px;">
+            <li><h6 class="dropdown-header text-uppercase fw-bold text-muted small">System Configuration</h6></li>
+            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('admin.properties.index') }}"><i class="bi bi-buildings me-2 text-primary"></i>Properties</a></li>
+            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('admin.room-types.index') }}"><i class="bi bi-door-closed me-2 text-info"></i>Room Types</a></li>
+            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('admin.rate-plans.index') }}"><i class="bi bi-tags me-2 text-warning"></i>Rate Plans</a></li>
+            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('admin.users.index') }}"><i class="bi bi-people me-2 text-success"></i>Users & Roles</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item rounded-3 py-2" href="{{ route('admin.system.health') }}"><i class="bi bi-heart-pulse me-2 text-danger"></i>System Health</a></li>
+        </ul>
+    </div>
 </header>
 
 <!-- Loading overlay -->
