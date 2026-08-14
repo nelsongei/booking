@@ -32,6 +32,11 @@ class Room extends Model
         });
     }
 
+    public function getNumberAttribute()
+    {
+        return $this->attributes['room_number'] ?? ($this->attributes['number'] ?? '');
+    }
+
     public function property()
     {
         return $this->belongsTo(Property::class);

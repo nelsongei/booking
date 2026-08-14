@@ -27,13 +27,16 @@ class FrontDeskController extends Controller
     }
 
     /**
-     * Interactive 14-Day Tape Chart Grid View.
+     * Interactive PMS Tape Chart Grid View.
      */
     public function tapeChart(Request $request)
     {
         $property  = $this->resolveCurrentProperty();
         $startDate = $request->has('start_date') ? Carbon::parse($request->get('start_date')) : now()->startOfDay();
-        $daysCount = 14;
+        $daysCount = (int) $request->get('days', 14);
+        if (!in_array($daysCount, [7, 14, 30])) {
+            $daysCount = 14;
+        }
 
         $dates = [];
         for ($i = 0; $i < $daysCount; $i++) {
@@ -42,9 +45,13 @@ class FrontDeskController extends Controller
 
         $rooms = $property ? Room::where('property_id', $property->id)
             ->with(['roomType', 'assignments.stay.reservation.primaryGuest'])
+            ->orderBy('room_number')
             ->get() : collect();
 
-        // Get all active stays for this property
+        // Group rooms by room type for structured timeline headers
+        $groupedRooms = $rooms->groupBy(fn($r) => $r->roomType?->name ?: 'Standard Rooms');
+
+        // Fetch all active Stays
         $stays = $property ? Stay::where('property_id', $property->id)
             ->where('status', '!=', 'cancelled')
             ->where('arrival_date', '<=', $startDate->copy()->addDays($daysCount)->toDateString())
@@ -52,7 +59,7 @@ class FrontDeskController extends Controller
             ->with(['reservation.primaryGuest', 'room', 'roomType'])
             ->get() : collect();
 
-        // Get all active reservations (confirmed, held, checked_in)
+        // Fetch active Reservations
         $reservations = $property ? Reservation::where('property_id', $property->id)
             ->whereIn('status', ['confirmed', 'held', 'checked_in'])
             ->where('check_in', '<=', $startDate->copy()->addDays($daysCount)->toDateString())
@@ -60,10 +67,8 @@ class FrontDeskController extends Controller
             ->with(['primaryGuest', 'rooms.roomType', 'stays.room'])
             ->get() : collect();
 
-        // Build Tape Chart Matrix: room_id => dateStr => cell_data
+        // Matrix mapping
         $matrix = [];
-        
-        // Group rooms by room_type_id for unassigned reservation mapping
         $roomsByType = [];
         foreach ($rooms as $rm) {
             $roomsByType[$rm->room_type_id][] = $rm;
@@ -83,14 +88,26 @@ class FrontDeskController extends Controller
             if ($rmId) {
                 $start = Carbon::parse($st->arrival_date);
                 $end   = Carbon::parse($st->departure_date);
+                $res   = $st->reservation;
+                $guest = $res?->primaryGuest;
+
                 for ($d = $start->copy(); $d->lt($end); $d->addDay()) {
                     $dStr = $d->toDateString();
                     $matrix[$rmId][$dStr] = [
+                        'key'          => 'stay_' . $st->id,
+                        'id'           => $st->id,
+                        'res_id'       => $res?->id,
                         'type'         => 'stay',
                         'status'       => $st->status,
-                        'reservation'  => $st->reservation,
-                        'guest'        => $st->reservation?->primaryGuest,
-                        'confirmation' => $st->reservation?->confirmation_number,
+                        'reservation'  => $res,
+                        'stay'         => $st,
+                        'guest'        => $guest,
+                        'guest_name'   => $guest ? ($guest->first_name . ' ' . $guest->last_name) : ($res?->confirmation_number ?: 'Guest'),
+                        'confirmation' => $res?->confirmation_number,
+                        'check_in'     => $st->arrival_date->toDateString(),
+                        'check_out'    => $st->departure_date->toDateString(),
+                        'nights'       => max(1, $start->diffInDays($end)),
+                        'balance'      => ($res?->balance_minor ?? 0) / 100,
                     ];
                 }
                 if ($st->reservation_id) {
@@ -99,7 +116,7 @@ class FrontDeskController extends Controller
             }
         }
 
-        // 2. Map Confirmed / Held Reservations to physical rooms of matching room_type
+        // 2. Map Confirmed / Held Reservations to candidate rooms
         foreach ($reservations as $res) {
             if (in_array($res->id, $assignedReservationIds)) {
                 continue;
@@ -110,7 +127,6 @@ class FrontDeskController extends Controller
                 $resStart = Carbon::parse($res->check_in);
                 $resEnd   = Carbon::parse($res->check_out);
 
-                // Find candidate room that is free for these dates
                 $assignedRoom = null;
                 foreach ($candidateRooms as $candidate) {
                     $isFree = true;
@@ -126,21 +142,30 @@ class FrontDeskController extends Controller
                     }
                 }
 
-                // Fallback to first room of type if all occupied
                 if (!$assignedRoom && !empty($candidateRooms)) {
                     $assignedRoom = $candidateRooms[0];
                 }
 
                 if ($assignedRoom) {
+                    $guest = $res->primaryGuest;
                     for ($d = $resStart->copy(); $d->lt($resEnd); $d->addDay()) {
                         $dStr = $d->toDateString();
                         if (!isset($matrix[$assignedRoom->id][$dStr])) {
                             $matrix[$assignedRoom->id][$dStr] = [
+                                'key'          => 'res_' . $res->id,
+                                'id'           => $res->id,
+                                'res_id'       => $res->id,
                                 'type'         => 'reservation',
                                 'status'       => $res->status,
                                 'reservation'  => $res,
-                                'guest'        => $res->primaryGuest,
+                                'stay'         => null,
+                                'guest'        => $guest,
+                                'guest_name'   => $guest ? ($guest->first_name . ' ' . $guest->last_name) : $res->confirmation_number,
                                 'confirmation' => $res->confirmation_number,
+                                'check_in'     => $resStart->toDateString(),
+                                'check_out'    => $resEnd->toDateString(),
+                                'nights'       => max(1, $resStart->diffInDays($resEnd)),
+                                'balance'      => ($res->balance_minor ?? 0) / 100,
                             ];
                         }
                     }
@@ -148,8 +173,29 @@ class FrontDeskController extends Controller
             }
         }
 
+        // Summary Stats
+        $totalRooms    = $rooms->count();
+        $occupiedCount = $rooms->where('status', 'occupied')->count();
+        $dirtyCount    = $rooms->where('status', 'dirty')->count();
+        $cleanCount    = $rooms->whereIn('status', ['clean', 'inspected'])->count();
+        $todayStr      = now()->toDateString();
+        
+        $arrivalsCount = $property ? Reservation::where('property_id', $property->id)
+            ->whereDate('check_in', $todayStr)
+            ->whereIn('status', ['confirmed', 'held'])
+            ->count() : 0;
+
+        $departuresCount = $property ? Stay::where('property_id', $property->id)
+            ->whereDate('departure_date', $todayStr)
+            ->where('status', 'checked_in')
+            ->count() : 0;
+
+        $occupancyRate = $totalRooms > 0 ? round(($occupiedCount / $totalRooms) * 100, 1) : 0;
+
         return view('admin.front_desk.tape_chart', compact(
-            'property', 'startDate', 'dates', 'rooms', 'reservations', 'matrix'
+            'property', 'startDate', 'daysCount', 'dates', 'rooms', 'groupedRooms', 
+            'reservations', 'matrix', 'totalRooms', 'occupiedCount', 'dirtyCount', 
+            'cleanCount', 'arrivalsCount', 'departuresCount', 'occupancyRate'
         ));
     }
 
