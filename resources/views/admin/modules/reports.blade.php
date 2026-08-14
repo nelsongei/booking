@@ -1,36 +1,37 @@
 @extends('layouts.app')
 
-@section('title', 'Reports & Executive Analytics')
+@section('title', 'Executive Reports & Analytics')
 @section('page-title', 'Executive PMS Analytics & Managerial Reports')
 @section('breadcrumb', 'Reports › Executive Analytics')
 
 @section('content')
 
-<!-- Style Adjustments -->
+<!-- Custom Chart & Card Styling -->
 <style>
     .report-card {
         border: none;
-        border-radius: 16px;
+        border-radius: 18px;
+        background: #ffffff;
         box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .report-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.09);
     }
-    .chart-container-box {
+    .chart-box {
         position: relative;
         width: 100%;
-        min-height: 280px;
+        height: 320px !important;
     }
     .kpi-icon-badge {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
 </style>
 
@@ -38,7 +39,7 @@
 <div class="page-header flex-wrap gap-3 mb-4">
     <div>
         <h1 class="fw-bold mb-1"><i class="bi bi-bar-chart-line text-primary me-2"></i>Executive Reports & Analytics</h1>
-        <p class="text-secondary small mb-0">Financial performance, RevPAR, ADR, occupancy trends & channel distribution for <strong>{{ $property?->name ?: 'All Properties' }}</strong></p>
+        <p class="text-secondary small mb-0">Real-time RevPAR, ADR, occupancy trends, channel distribution & operational performance for <strong>{{ $property?->name ?: 'All Properties' }}</strong></p>
     </div>
 
     <!-- Date Range & Export Actions -->
@@ -86,53 +87,60 @@
     <!-- ==================== TAB 1: EXECUTIVE ANALYTICS ==================== -->
 
     <!-- Date Preset Buttons -->
-    <div class="d-flex gap-2 mb-4">
-        <a href="{{ route('admin.reports.index', ['tab' => 'analytics', 'start_date' => now()->subDays(6)->toDateString(), 'end_date' => now()->toDateString()]) }}" 
-           class="btn btn-sm btn-light border rounded-pill px-3">
-            Last 7 Days
-        </a>
-        <a href="{{ route('admin.reports.index', ['tab' => 'analytics', 'start_date' => now()->subDays(29)->toDateString(), 'end_date' => now()->toDateString()]) }}" 
-           class="btn btn-sm btn-light border rounded-pill px-3">
-            Last 30 Days
-        </a>
-        <a href="{{ route('admin.reports.index', ['tab' => 'analytics', 'start_date' => now()->startOfMonth()->toDateString(), 'end_date' => now()->toDateString()]) }}" 
-           class="btn btn-sm btn-light border rounded-pill px-3">
-            This Month
-        </a>
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+        <div class="d-flex gap-2">
+            <a href="{{ route('admin.reports.index', ['tab' => 'analytics', 'start_date' => now()->subDays(6)->toDateString(), 'end_date' => now()->toDateString()]) }}" 
+               class="btn btn-sm btn-light border rounded-pill px-3 fw-semibold shadow-xs">
+                Last 7 Days
+            </a>
+            <a href="{{ route('admin.reports.index', ['tab' => 'analytics', 'start_date' => now()->subDays(29)->toDateString(), 'end_date' => now()->toDateString()]) }}" 
+               class="btn btn-sm btn-light border rounded-pill px-3 fw-semibold shadow-xs">
+                Last 30 Days
+            </a>
+            <a href="{{ route('admin.reports.index', ['tab' => 'analytics', 'start_date' => now()->startOfMonth()->toDateString(), 'end_date' => now()->toDateString()]) }}" 
+               class="btn btn-sm btn-light border rounded-pill px-3 fw-semibold shadow-xs">
+                This Month
+            </a>
+        </div>
+
+        <div class="small text-muted fw-medium">
+            Reporting Period: <strong class="text-dark">{{ Carbon\Carbon::parse($startDate)->format('M d, Y') }} &rarr; {{ Carbon\Carbon::parse($endDate)->format('M d, Y') }}</strong>
+        </div>
     </div>
 
-    <!-- KPI Summary Row -->
+    <!-- 4 Main KPI Cards -->
     <div class="row g-3 mb-4">
         <!-- Gross Revenue -->
         <div class="col-6 col-md-3">
-            <div class="card report-card bg-white p-3 border-start border-4 border-success">
+            <div class="card report-card p-3.5 border-start border-4 border-success">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <div class="text-secondary small fw-bold text-uppercase">Gross Revenue</div>
-                        <div class="fs-4 fw-bold text-dark mt-1">
+                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Gross Revenue</div>
+                        <div class="fs-3 fw-bold text-dark mt-1">
                             ${{ number_format(($metrics['total_gross_revenue_minor'] ?? 0) / 100, 2) }}
                         </div>
                     </div>
                     <div class="kpi-icon-badge bg-success-subtle text-success">
-                        <i class="bi bi-currency-dollar fs-4"></i>
+                        <i class="bi bi-currency-dollar"></i>
                     </div>
                 </div>
-                <div class="small text-muted mt-2">
-                    <span class="text-success fw-bold"><i class="bi bi-arrow-up-right me-1"></i>{{ $metrics['reservations_count'] ?? 0 }} Bookings</span> &bull; {{ $metrics['currency'] ?? 'USD' }}
+                <div class="small text-muted mt-2 d-flex align-items-center justify-content-between">
+                    <span>{{ $metrics['reservations_count'] ?? 0 }} Total Bookings</span>
+                    <span class="badge bg-success-subtle text-success rounded-pill px-2 py-0.5 fw-bold">{{ $metrics['currency'] ?? 'USD' }}</span>
                 </div>
             </div>
         </div>
 
         <!-- Occupancy % -->
         <div class="col-6 col-md-3">
-            <div class="card report-card bg-white p-3 border-start border-4 border-primary">
+            <div class="card report-card p-3.5 border-start border-4 border-primary">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <div class="text-secondary small fw-bold text-uppercase">Occupancy Rate</div>
-                        <div class="fs-4 fw-bold text-dark mt-1">{{ $metrics['occupancy_pct'] ?? 0 }}%</div>
+                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Occupancy Rate</div>
+                        <div class="fs-3 fw-bold text-dark mt-1">{{ $metrics['occupancy_pct'] ?? 0 }}%</div>
                     </div>
                     <div class="kpi-icon-badge bg-primary-subtle text-primary">
-                        <i class="bi bi-pie-chart-fill fs-4"></i>
+                        <i class="bi bi-pie-chart-fill"></i>
                     </div>
                 </div>
                 <div class="progress mt-2.5" style="height: 6px;">
@@ -143,57 +151,57 @@
 
         <!-- ADR -->
         <div class="col-6 col-md-3">
-            <div class="card report-card bg-white p-3 border-start border-4 border-warning">
+            <div class="card report-card p-3.5 border-start border-4 border-warning">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <div class="text-secondary small fw-bold text-uppercase">Average Daily Rate</div>
-                        <div class="fs-4 fw-bold text-dark mt-1">
+                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Average Daily Rate</div>
+                        <div class="fs-3 fw-bold text-dark mt-1">
                             ${{ number_format(($metrics['adr_minor'] ?? 0) / 100, 2) }}
                         </div>
                     </div>
                     <div class="kpi-icon-badge bg-warning-subtle text-warning-emphasis">
-                        <i class="bi bi-graph-up-arrow fs-4"></i>
+                        <i class="bi bi-graph-up-arrow"></i>
                     </div>
                 </div>
                 <div class="small text-muted mt-2">
-                    <span class="fw-semibold">ADR per occupied room night</span>
+                    <span>Average Rate per Room Night</span>
                 </div>
             </div>
         </div>
 
         <!-- RevPAR -->
         <div class="col-6 col-md-3">
-            <div class="card report-card bg-white p-3 border-start border-4 border-info">
+            <div class="card report-card p-3.5 border-start border-4 border-info">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
-                        <div class="text-secondary small fw-bold text-uppercase">RevPAR Yield</div>
-                        <div class="fs-4 fw-bold text-dark mt-1">
+                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">RevPAR Yield</div>
+                        <div class="fs-3 fw-bold text-dark mt-1">
                             ${{ number_format(($metrics['revpar_minor'] ?? 0) / 100, 2) }}
                         </div>
                     </div>
                     <div class="kpi-icon-badge bg-info-subtle text-info-emphasis">
-                        <i class="bi bi-building fs-4"></i>
+                        <i class="bi bi-building"></i>
                     </div>
                 </div>
                 <div class="small text-muted mt-2">
-                    <span class="fw-semibold">Revenue per available inventory room</span>
+                    <span>Revenue per Physical Room</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Visual Charts Grid (4 Interactive Graphs) -->
+    <!-- Visual Charts Grid (4 Interactive Graph Canvas Cards) -->
     <div class="row g-4 mb-4">
         <!-- Chart 1: Revenue ($) & Occupancy (%) Dual-Axis Line Area Chart -->
         <div class="col-12 col-lg-8">
-            <div class="card report-card bg-white h-100">
+            <div class="card report-card h-100">
                 <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow me-2 text-success"></i>Daily Gross Revenue ($) & Occupancy Trend</h6>
                     <span class="badge bg-light text-dark border fw-normal">{{ $startDate }} &rarr; {{ $endDate }}</span>
                 </div>
-                <div class="card-body">
-                    <div class="chart-container-box">
-                        <canvas id="revenueTrendChart" height="280"></canvas>
+                <div class="card-body p-4">
+                    <div class="chart-box">
+                        <canvas id="revenueTrendChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -201,13 +209,13 @@
 
         <!-- Chart 2: Booking Channel Distribution Doughnut Chart -->
         <div class="col-12 col-lg-4">
-            <div class="card report-card bg-white h-100">
+            <div class="card report-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
-                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-pie-chart me-2 text-primary"></i>Booking Sources & Channels</h6>
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-pie-chart me-2 text-primary"></i>Booking Sources & Channels Share</h6>
                 </div>
-                <div class="card-body d-flex align-items-center justify-content-center">
-                    <div class="chart-container-box d-flex align-items-center justify-content-center">
-                        <canvas id="channelDoughnutChart" height="250"></canvas>
+                <div class="card-body p-4 d-flex align-items-center justify-content-center">
+                    <div class="chart-box">
+                        <canvas id="channelDoughnutChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -215,38 +223,38 @@
 
         <!-- Chart 3: ADR vs RevPAR Benchmark Comparison Bar Chart -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card bg-white h-100">
+            <div class="card report-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-bar-chart-steps me-2 text-warning"></i>ADR vs RevPAR Daily Benchmark ($)</h6>
                 </div>
-                <div class="card-body">
-                    <div class="chart-container-box">
-                        <canvas id="adrRevparChart" height="240"></canvas>
+                <div class="card-body p-4">
+                    <div class="chart-box">
+                        <canvas id="adrRevparChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Chart 4: Room Category Revenue Distribution -->
+        <!-- Chart 4: Room Category Performance Bar Chart -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card bg-white h-100">
+            <div class="card report-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
-                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-door-open me-2 text-info"></i>Room Type Performance & Bookings Count</h6>
+                    <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-door-open me-2 text-info"></i>Room Category Revenue Performance ($)</h6>
                 </div>
-                <div class="card-body">
-                    <div class="chart-container-box">
-                        <canvas id="roomTypePerformanceChart" height="240"></canvas>
+                <div class="card-body p-4">
+                    <div class="chart-box">
+                        <canvas id="roomTypePerformanceChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Data Tables Section -->
+    <!-- Data Tables & Financial Summaries Section -->
     <div class="row g-4">
         <!-- Channel Performance Breakdown -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card bg-white h-100">
+            <div class="card report-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-diagram-3 me-2 text-primary"></i>Channel Revenue & Booking Volume</h6>
                 </div>
@@ -263,7 +271,7 @@
                             @forelse($channels as $chn)
                                 <tr>
                                     <td class="ps-3 fw-bold text-dark">{{ $chn['name'] }}</td>
-                                    <td><span class="badge bg-secondary rounded-pill px-2.5">{{ $chn['count'] }} Bookings</span></td>
+                                    <td><span class="badge bg-secondary rounded-pill px-2.5 py-1">{{ $chn['count'] }} Bookings</span></td>
                                     <td class="text-end pe-3 fw-bold text-success">
                                         ${{ number_format($chn['revenue_minor'] / 100, 2) }} {{ $metrics['currency'] ?? 'USD' }}
                                     </td>
@@ -281,7 +289,7 @@
 
         <!-- Capacity & Financial Summary -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card bg-white h-100">
+            <div class="card report-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-calculator me-2 text-primary"></i>Capacity & Financial Audit Summary</h6>
                 </div>
@@ -300,12 +308,14 @@
                             <strong class="text-success">{{ $metrics['occupied_room_nights'] ?? 0 }} Nights</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-4">
-                            <span>Net Room Charges</span>
-                            <strong>${{ number_format(($metrics['total_room_revenue_minor'] ?? 0) / 100, 2) }} {{ $metrics['currency'] ?? 'USD' }}</strong>
+                            <span>Average Length of Stay (ALOS)</span>
+                            <strong class="text-dark">{{ $metrics['alos'] ?? 1 }} Nights</strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-4">
-                            <span>Taxes & Fees Collected</span>
-                            <strong>${{ number_format((($metrics['total_tax_minor'] ?? 0) + ($metrics['total_fee_minor'] ?? 0)) / 100, 2) }} {{ $metrics['currency'] ?? 'USD' }}</strong>
+                            <span>Unpaid Balance / Accounts Receivable</span>
+                            <strong class="{{ ($metrics['unpaid_balance_minor'] ?? 0) > 0 ? 'text-danger' : 'text-success' }}">
+                                ${{ number_format(($metrics['unpaid_balance_minor'] ?? 0) / 100, 2) }} {{ $metrics['currency'] ?? 'USD' }}
+                            </strong>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center py-3 px-4 bg-light">
                             <span class="fw-bold text-dark">Gross Total Revenue</span>
@@ -455,7 +465,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (timeSeriesData && timeSeriesData.labels && timeSeriesData.labels.length > 0) {
         const ctxRev = document.getElementById('revenueTrendChart').getContext('2d');
         
-        // Gradient fill for Revenue
         const revGradient = ctxRev.createLinearGradient(0, 0, 0, 300);
         revGradient.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
         revGradient.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
@@ -497,12 +506,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 maintainAspectRatio: false,
                 interaction: { mode: 'index', intersect: false },
                 plugins: {
-                    legend: { position: 'top' },
+                    legend: { position: 'top', labels: { font: { weight: 'bold' } } },
                     tooltip: {
                         padding: 12,
                         backgroundColor: '#0f172a',
                         titleFont: { size: 13, weight: 'bold' },
-                        bodyFont: { size: 12 }
+                        bodyFont: { size: 12 },
+                        cornerRadius: 8
                     }
                 },
                 scales: {
@@ -535,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 datasets: [{
                     data: channelData.map(c => c.revenue_minor / 100),
                     backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#14b8a6'],
-                    borderWidth: 2,
+                    borderWidth: 3,
                     borderColor: '#ffffff',
                 }]
             },
@@ -543,7 +553,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15 } },
+                    legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15, font: { size: 11, weight: 'bold' } } },
                     tooltip: {
                         callbacks: {
                             label: function(ctx) {
@@ -552,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 },
-                cutout: '70%'
+                cutout: '68%'
             }
         });
     }
@@ -582,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'top' } },
+                plugins: { legend: { position: 'top', labels: { font: { weight: 'bold' } } } },
                 scales: {
                     x: { grid: { display: false } },
                     y: {
