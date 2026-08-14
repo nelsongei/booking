@@ -23,9 +23,12 @@ class Room extends Model
     protected static function booted()
     {
         static::creating(function ($room) {
-            if (empty($room->room_number)) {
-                $room->room_number = $room->number ?? (string) rand(100, 999);
+            $num = $room->attributes['room_number'] ?? ($room->attributes['number'] ?? null);
+            if (empty($num)) {
+                $num = (string) rand(100, 999);
             }
+            $room->room_number = (string) $num;
+
             if (empty($room->ulid)) {
                 $room->ulid = (string) \Illuminate\Support\Str::ulid();
             }
@@ -34,7 +37,12 @@ class Room extends Model
 
     public function getNumberAttribute()
     {
-        return $this->attributes['room_number'] ?? ($this->attributes['number'] ?? '');
+        return $this->attributes['room_number'] ?? null;
+    }
+
+    public function setNumberAttribute($value)
+    {
+        $this->attributes['room_number'] = $value;
     }
 
     public function property()

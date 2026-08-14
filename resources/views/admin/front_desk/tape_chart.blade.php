@@ -39,6 +39,13 @@
 
 <div class="tape-chart-container">
 
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold mb-1"><i class="bi bi-calendar3 text-primary me-2"></i>Tape Chart</h1>
+            <p class="text-secondary small mb-0">Visual room occupancy matrix for <strong>{{ $property?->name ?: 'All Properties' }}</strong></p>
+        </div>
+    </div>
+
     <!-- KPI & Occupancy Banner -->
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
@@ -344,7 +351,7 @@
                                         @endphp
                                     @else
                                         @php
-                                            $cellDateObj = Carbon::parse($curDateStr);
+                                            $cellDateObj = \Carbon\Carbon::parse($curDateStr);
                                             $slotBg = $cellDateObj->isToday() ? 'bg-primary bg-opacity-10' : ($cellDateObj->isWeekend() ? 'bg-secondary bg-opacity-10' : 'bg-light-subtle');
                                         @endphp
                                         <td class="{{ $slotBg }} text-center p-0 align-middle empty-slot-td border-end" 
@@ -436,11 +443,11 @@
                                         </div>
                                         <div class="d-flex justify-content-between mb-2">
                                             <span class="text-muted small">Check-In:</span>
-                                            <span class="fw-semibold text-dark">{{ Carbon::parse($cell['check_in'])->format('M d, Y') }}</span>
+                                            <span class="fw-semibold text-dark">{{ \Carbon\Carbon::parse($cell['check_in'])->format('M d, Y') }}</span>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2">
                                             <span class="text-muted small">Check-Out:</span>
-                                            <span class="fw-semibold text-dark">{{ Carbon::parse($cell['check_out'])->format('M d, Y') }}</span>
+                                            <span class="fw-semibold text-dark">{{ \Carbon\Carbon::parse($cell['check_out'])->format('M d, Y') }}</span>
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <span class="text-muted small">Balance Due:</span>

@@ -175,6 +175,7 @@ return new class extends Migration
 
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('dead_letter_items');
         Schema::dropIfExists('webhook_events');
         Schema::dropIfExists('integration_connections');
@@ -185,5 +186,6 @@ return new class extends Migration
         Schema::dropIfExists('maintenance_requests');
         Schema::dropIfExists('housekeeping_status_history');
         Schema::dropIfExists('housekeeping_tasks');
+        Schema::enableForeignKeyConstraints();
     }
 };
