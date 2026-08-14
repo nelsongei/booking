@@ -31,19 +31,26 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        $property = $this->resolveCurrentProperty();
-
+        $property  = $this->resolveCurrentProperty();
         $startDate = $request->input('start_date', now()->subDays(29)->toDateString());
         $endDate   = $request->input('end_date', now()->toDateString());
+        $activeTab = $request->input('tab', 'analytics');
+
+        $auditLogs = \App\Infrastructure\Persistence\AuditLog::with('actor')
+            ->orderBy('created_at', 'desc')
+            ->paginate(20)
+            ->withQueryString();
 
         if (!$property) {
             return view('admin.modules.reports', [
                 'property'   => null,
                 'startDate'  => $startDate,
                 'endDate'    => $endDate,
+                'activeTab'  => $activeTab,
                 'metrics'    => [],
                 'timeSeries' => [],
                 'channels'   => [],
+                'auditLogs'  => $auditLogs,
             ]);
         }
 
@@ -52,7 +59,7 @@ class ReportController extends Controller
         $channels   = $this->analyticsService->getBookingSourceDistribution($property, $startDate, $endDate);
 
         return view('admin.modules.reports', compact(
-            'property', 'startDate', 'endDate', 'metrics', 'timeSeries', 'channels'
+            'property', 'startDate', 'endDate', 'activeTab', 'metrics', 'timeSeries', 'channels', 'auditLogs'
         ));
     }
 

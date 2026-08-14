@@ -937,7 +937,7 @@
                         $actorName   = $notif->actor?->name ?: 'System Admin';
                         $timeAgo     = $notif->created_at ? $notif->created_at->diffForHumans() : 'Just now';
                     @endphp
-                    <a href="{{ route('admin.reports.index') }}" class="dropdown-item p-3 border-bottom d-flex align-items-start gap-3 text-wrap">
+                    <a href="{{ route('admin.reports.index', ['tab' => 'audit']) }}" class="dropdown-item p-3 border-bottom d-flex align-items-start gap-3 text-wrap">
                         <div class="rounded-circle p-2.5 d-flex align-items-center justify-content-center flex-shrink-0 {{ $iconClass }}" style="width: 38px; height: 38px;">
                             <i class="bi {{ strtok($iconClass, ' ') }} fs-6"></i>
                         </div>
@@ -972,7 +972,7 @@
 
             <!-- Footer -->
             <div class="p-2.5 bg-light text-center border-top">
-                <a href="{{ route('admin.reports.index') }}" class="text-decoration-none fw-bold small text-primary">
+                <a href="{{ route('admin.reports.index', ['tab' => 'audit']) }}" class="text-decoration-none fw-bold small text-primary">
                     View All Audit Logs & Alerts &rarr;
                 </a>
             </div>
