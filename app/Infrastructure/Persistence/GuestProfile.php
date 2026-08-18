@@ -34,6 +34,11 @@ class GuestProfile extends Model
         return $this->hasMany(Reservation::class, 'primary_guest_id');
     }
 
+    public function loyaltyAccount()
+    {
+        return $this->hasOne(LoyaltyAccount::class, 'guest_profile_id');
+    }
+
     public function getFullNameAttribute(): string
     {
         return trim(($this->title ? $this->title . ' ' : '') . $this->first_name . ' ' . $this->last_name);

@@ -6,32 +6,64 @@
 
 @section('content')
 
-<!-- Custom Chart & Card Styling -->
+<!-- Custom Styling for Clean KPI Cards & Chart Containers -->
 <style>
-    .report-card {
-        border: none;
-        border-radius: 18px;
+    .stat-card-executive {
         background: #ffffff;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        border-radius: 16px;
+        padding: 1.25rem 1.4rem;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .report-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.09);
+    .stat-card-executive:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    }
+    .stat-card-executive::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+    }
+    .stat-card-executive.emerald::before { background: #10b981; }
+    .stat-card-executive.blue::before { background: #3b82f6; }
+    .stat-card-executive.amber::before { background: #f59e0b; }
+    .stat-card-executive.teal::before { background: #14b8a6; }
+
+    .stat-card-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+    .stat-card-icon.emerald { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+    .stat-card-icon.blue { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+    .stat-card-icon.amber { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+    .stat-card-icon.teal { background: rgba(20, 184, 166, 0.12); color: #14b8a6; }
+
+    .report-chart-card {
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        border-radius: 18px;
+        background: #ffffff;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
     }
     .chart-box {
         position: relative;
         width: 100%;
         height: 320px !important;
-    }
-    .kpi-icon-badge {
-        width: 52px;
-        height: 52px;
-        border-radius: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
     }
 </style>
 
@@ -108,82 +140,76 @@
         </div>
     </div>
 
-    <!-- 4 Main KPI Cards -->
+    <!-- 4 Modern Executive KPI Cards -->
     <div class="row g-3 mb-4">
         <!-- Gross Revenue -->
-        <div class="col-6 col-md-3">
-            <div class="card report-card p-3.5 border-start border-4 border-success">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Gross Revenue</div>
-                        <div class="fs-3 fw-bold text-dark mt-1">
-                            ${{ number_format(($metrics['total_gross_revenue_minor'] ?? 0) / 100, 2) }}
-                        </div>
-                    </div>
-                    <div class="kpi-icon-badge bg-success-subtle text-success">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card-executive emerald">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">Gross Revenue</span>
+                    <div class="stat-card-icon emerald">
                         <i class="bi bi-currency-dollar"></i>
                     </div>
                 </div>
-                <div class="small text-muted mt-2 d-flex align-items-center justify-content-between">
-                    <span>{{ $metrics['reservations_count'] ?? 0 }} Total Bookings</span>
-                    <span class="badge bg-success-subtle text-success rounded-pill px-2 py-0.5 fw-bold">{{ $metrics['currency'] ?? 'USD' }}</span>
+                <div class="fs-2 fw-bold text-dark mb-1">
+                    ${{ number_format(($metrics['total_gross_revenue_minor'] ?? 0) / 100, 2) }}
+                </div>
+                <div class="d-flex align-items-center justify-content-between text-muted small mt-2 pt-2 border-top border-light">
+                    <span><i class="bi bi-check-circle-fill text-success me-1"></i>{{ $metrics['reservations_count'] ?? 0 }} Total Bookings</span>
+                    <span class="badge bg-light text-dark border">{{ $metrics['currency'] ?? 'USD' }}</span>
                 </div>
             </div>
         </div>
 
         <!-- Occupancy % -->
-        <div class="col-6 col-md-3">
-            <div class="card report-card p-3.5 border-start border-4 border-primary">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Occupancy Rate</div>
-                        <div class="fs-3 fw-bold text-dark mt-1">{{ $metrics['occupancy_pct'] ?? 0 }}%</div>
-                    </div>
-                    <div class="kpi-icon-badge bg-primary-subtle text-primary">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card-executive blue">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">Occupancy Rate</span>
+                    <div class="stat-card-icon blue">
                         <i class="bi bi-pie-chart-fill"></i>
                     </div>
                 </div>
-                <div class="progress mt-2.5" style="height: 6px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(100, $metrics['occupancy_pct'] ?? 0) }}%"></div>
+                <div class="fs-2 fw-bold text-dark mb-1">{{ $metrics['occupancy_pct'] ?? 0 }}%</div>
+                <div class="mt-2 pt-2 border-top border-light">
+                    <div class="progress" style="height: 6px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ min(100, $metrics['occupancy_pct'] ?? 0) }}%"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- ADR -->
-        <div class="col-6 col-md-3">
-            <div class="card report-card p-3.5 border-start border-4 border-warning">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">Average Daily Rate</div>
-                        <div class="fs-3 fw-bold text-dark mt-1">
-                            ${{ number_format(($metrics['adr_minor'] ?? 0) / 100, 2) }}
-                        </div>
-                    </div>
-                    <div class="kpi-icon-badge bg-warning-subtle text-warning-emphasis">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card-executive amber">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">Average Daily Rate</span>
+                    <div class="stat-card-icon amber">
                         <i class="bi bi-graph-up-arrow"></i>
                     </div>
                 </div>
-                <div class="small text-muted mt-2">
+                <div class="fs-2 fw-bold text-dark mb-1">
+                    ${{ number_format(($metrics['adr_minor'] ?? 0) / 100, 2) }}
+                </div>
+                <div class="text-muted small mt-2 pt-2 border-top border-light">
                     <span>Average Rate per Room Night</span>
                 </div>
             </div>
         </div>
 
         <!-- RevPAR -->
-        <div class="col-6 col-md-3">
-            <div class="card report-card p-3.5 border-start border-4 border-info">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <div class="text-secondary small fw-bold text-uppercase" style="letter-spacing: 0.5px;">RevPAR Yield</div>
-                        <div class="fs-3 fw-bold text-dark mt-1">
-                            ${{ number_format(($metrics['revpar_minor'] ?? 0) / 100, 2) }}
-                        </div>
-                    </div>
-                    <div class="kpi-icon-badge bg-info-subtle text-info-emphasis">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card-executive teal">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-uppercase fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 0.5px;">RevPAR Yield</span>
+                    <div class="stat-card-icon teal">
                         <i class="bi bi-building"></i>
                     </div>
                 </div>
-                <div class="small text-muted mt-2">
+                <div class="fs-2 fw-bold text-dark mb-1">
+                    ${{ number_format(($metrics['revpar_minor'] ?? 0) / 100, 2) }}
+                </div>
+                <div class="text-muted small mt-2 pt-2 border-top border-light">
                     <span>Revenue per Physical Room</span>
                 </div>
             </div>
@@ -194,7 +220,7 @@
     <div class="row g-4 mb-4">
         <!-- Chart 1: Revenue ($) & Occupancy (%) Dual-Axis Line Area Chart -->
         <div class="col-12 col-lg-8">
-            <div class="card report-card h-100">
+            <div class="card report-chart-card h-100">
                 <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-graph-up-arrow me-2 text-success"></i>Daily Gross Revenue ($) & Occupancy Trend</h6>
                     <span class="badge bg-light text-dark border fw-normal">{{ $startDate }} &rarr; {{ $endDate }}</span>
@@ -209,7 +235,7 @@
 
         <!-- Chart 2: Booking Channel Distribution Doughnut Chart -->
         <div class="col-12 col-lg-4">
-            <div class="card report-card h-100">
+            <div class="card report-chart-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-pie-chart me-2 text-primary"></i>Booking Sources & Channels Share</h6>
                 </div>
@@ -223,7 +249,7 @@
 
         <!-- Chart 3: ADR vs RevPAR Benchmark Comparison Bar Chart -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card h-100">
+            <div class="card report-chart-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-bar-chart-steps me-2 text-warning"></i>ADR vs RevPAR Daily Benchmark ($)</h6>
                 </div>
@@ -237,7 +263,7 @@
 
         <!-- Chart 4: Room Category Performance Bar Chart -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card h-100">
+            <div class="card report-chart-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-door-open me-2 text-info"></i>Room Category Revenue Performance ($)</h6>
                 </div>
@@ -254,7 +280,7 @@
     <div class="row g-4">
         <!-- Channel Performance Breakdown -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card h-100">
+            <div class="card report-chart-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-diagram-3 me-2 text-primary"></i>Channel Revenue & Booking Volume</h6>
                 </div>
@@ -289,7 +315,7 @@
 
         <!-- Capacity & Financial Summary -->
         <div class="col-12 col-lg-6">
-            <div class="card report-card h-100">
+            <div class="card report-chart-card h-100">
                 <div class="card-header bg-white py-3 border-bottom">
                     <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-calculator me-2 text-primary"></i>Capacity & Financial Audit Summary</h6>
                 </div>
@@ -329,7 +355,7 @@
 
 @else
     <!-- ==================== TAB 2: AUDIT LOGS & ALERTS ==================== -->
-    <div class="card report-card bg-white overflow-hidden">
+    <div class="card report-chart-card bg-white overflow-hidden">
         <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
             <div>
                 <h6 class="fw-bold mb-0 text-dark"><i class="bi bi-shield-lock me-2 text-primary"></i>System Audit Trail & Operational Events</h6>
