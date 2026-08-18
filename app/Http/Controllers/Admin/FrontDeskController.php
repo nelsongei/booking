@@ -56,7 +56,7 @@ class FrontDeskController extends Controller
             ->where('status', '!=', 'cancelled')
             ->where('arrival_date', '<=', $startDate->copy()->addDays($daysCount)->toDateString())
             ->where('departure_date', '>=', $startDate->toDateString())
-            ->with(['reservation.primaryGuest', 'room', 'roomType'])
+            ->with(['reservation.primaryGuest', 'room.roomType', 'reservationRoom.roomType', 'roomType'])
             ->get() : collect();
 
         // Fetch active Reservations
@@ -79,8 +79,9 @@ class FrontDeskController extends Controller
         // 1. Assign explicit Stays to physical rooms
         foreach ($stays as $st) {
             $rmId = $st->room_id;
-            if (!$rmId && $st->room_type_id) {
-                $possibleRooms = $roomsByType[$st->room_type_id] ?? [];
+            $roomTypeId = $st->room?->room_type_id ?? $st->reservationRoom?->room_type_id ?? $st->roomType?->id;
+            if (!$rmId && $roomTypeId) {
+                $possibleRooms = $roomsByType[$roomTypeId] ?? [];
                 if (!empty($possibleRooms)) {
                     $rmId = $possibleRooms[0]->id;
                 }

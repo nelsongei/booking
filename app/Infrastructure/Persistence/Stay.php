@@ -42,6 +42,11 @@ class Stay extends Model
         return $this->belongsTo(Room::class);
     }
 
+    public function roomType()
+    {
+        return $this->hasOneThrough(RoomType::class, ReservationRoom::class, 'id', 'id', 'reservation_room_id', 'room_type_id');
+    }
+
     public function assignments()
     {
         return $this->hasMany(RoomAssignment::class);
