@@ -128,6 +128,9 @@
                                         <div class="col-md-6">
                                             <label class="form-label">Points Quantity</label>
                                             <input type="number" name="points" class="form-control" required placeholder="500">
+                                            <div class="form-text text-muted" style="font-size:.75rem">
+                                                For <strong>Manual Adjustment</strong>, use a negative value (e.g. <code>-200</code>) to deduct points.
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="mb-3">
