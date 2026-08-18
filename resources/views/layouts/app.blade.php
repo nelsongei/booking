@@ -643,6 +643,53 @@
             .main-content { margin-left: 0; padding: 20px 16px; }
             .topbar-search { display: none; }
         }
+
+        /* ===== MODAL RESET =====
+           The global .card / .card-header / .card-body rules above conflict with
+           Bootstrap's modal internals (which use the same class names).
+           These overrides restore Bootstrap's expected behaviour inside any .modal.
+        */
+        .modal .modal-content {
+            overflow: visible;
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .modal .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 1rem 1rem 0 0;
+            background: #ffffff;
+            gap: 0;
+        }
+
+        .modal .modal-header h5,
+        .modal .modal-header h6 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.2px;
+        }
+
+        .modal .modal-body {
+            padding: 1.5rem;
+            background: #ffffff;
+        }
+
+        .modal .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            border-radius: 0 0 1rem 1rem;
+            background: #f9fafb;
+        }
     </style>
 
     @stack('styles')
