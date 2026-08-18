@@ -61,14 +61,18 @@ class LoyaltyController extends Controller
      */
     public function adjustPoints(Request $request, LoyaltyAccount $account)
     {
+        $type = $request->input('type');
+
         $request->validate([
-            'points'      => 'required|integer',
+            'points'      => $type === 'adjustment'
+                                ? 'required|integer|not_in:0'
+                                : 'required|integer|min:1',
             'type'        => 'required|string|in:earn,redeem,adjustment',
             'description' => 'required|string|max:255',
         ]);
 
         $points = (int) $request->input('points');
-        if ($request->input('type') === 'redeem' && $points > 0) {
+        if ($type === 'redeem' && $points > 0) {
             $points = -$points;
         }
 

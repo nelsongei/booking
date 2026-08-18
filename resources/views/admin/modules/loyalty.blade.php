@@ -119,7 +119,8 @@
                                     <div class="row g-3 mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label">Transaction Type</label>
-                                            <select name="type" class="form-select" required>
+                                            <select name="type" id="adjType_{{ $acc->id }}" class="form-select" required
+                                                onchange="syncPointsInput({{ $acc->id }})">
                                                 <option value="earn">Earn Points (+)</option>
                                                 <option value="redeem">Redeem Points (-)</option>
                                                 <option value="adjustment">Manual Adjustment</option>
@@ -127,9 +128,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Points Quantity</label>
-                                            <input type="number" name="points" class="form-control" required placeholder="500">
-                                            <div class="form-text text-muted" style="font-size:.75rem">
-                                                For <strong>Manual Adjustment</strong>, use a negative value (e.g. <code>-200</code>) to deduct points.
+                                            <input type="number" name="points" id="adjPoints_{{ $acc->id }}"
+                                                class="form-control" required step="1" min="1" placeholder="500">
+                                            <div id="adjHint_{{ $acc->id }}" class="form-text text-muted d-none" style="font-size:.75rem">
+                                                Use a <strong>negative value</strong> (e.g. <code>-200</code>) to deduct, positive to add.
                                             </div>
                                         </div>
                                     </div>
@@ -182,5 +184,26 @@
         </form>
     </div>
 </div>
+
+
+@push('scripts')
+<script>
+function syncPointsInput(accId) {
+    const type   = document.getElementById('adjType_'   + accId);
+    const points = document.getElementById('adjPoints_' + accId);
+    const hint   = document.getElementById('adjHint_'   + accId);
+
+    points.value = '';
+
+    if (type.value === 'adjustment') {
+        points.removeAttribute('min');
+        hint.classList.remove('d-none');
+    } else {
+        points.setAttribute('min', '1');
+        hint.classList.add('d-none');
+    }
+}
+</script>
+@endpush
 
 @endsection
