@@ -107,44 +107,48 @@
                     </tr>
 
                     <!-- Adjust Points Modal -->
-                    <div class="modal fade" id="adjustModal_{{ $acc->id }}" tabindex="-1">
-                        <div class="modal-dialog">
-                            <form method="POST" action="{{ route('admin.loyalty.adjust', $acc) }}" class="modal-content">
-                                @csrf
-                                <div class="modal-header">
-                                    <h5 class="modal-title fw-bold"><i class="bi bi-plus-minus me-2 text-primary"></i>Adjust Points — {{ $acc->guestProfile?->fullName }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Transaction Type</label>
-                                            <select name="type" id="adjType_{{ $acc->id }}" class="form-select" required
-                                                onchange="syncPointsInput({{ $acc->id }})">
-                                                <option value="earn">Earn Points (+)</option>
-                                                <option value="redeem">Redeem Points (-)</option>
-                                                <option value="adjustment">Manual Adjustment</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Points Quantity</label>
-                                            <input type="number" name="points" id="adjPoints_{{ $acc->id }}"
-                                                class="form-control" required step="1" min="1" placeholder="500">
-                                            <div id="adjHint_{{ $acc->id }}" class="form-text text-muted d-none" style="font-size:.75rem">
-                                                Use a <strong>negative value</strong> (e.g. <code>-200</code>) to deduct, positive to add.
+                    <div class="modal fade" id="adjustModal_{{ $acc->id }}" tabindex="-1" aria-labelledby="adjustModalLabel_{{ $acc->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <form method="POST" action="{{ route('admin.loyalty.adjust', $acc) }}">
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h5 class="modal-title fw-bold" id="adjustModalLabel_{{ $acc->id }}">
+                                            <i class="bi bi-plus-minus me-2 text-primary"></i>Adjust Points — {{ $acc->guestProfile?->fullName }}
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row g-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Transaction Type</label>
+                                                <select name="type" id="adjType_{{ $acc->id }}" class="form-select" required
+                                                    onchange="syncPointsInput({{ $acc->id }})">
+                                                    <option value="earn">Earn Points (+)</option>
+                                                    <option value="redeem">Redeem Points (-)</option>
+                                                    <option value="adjustment">Manual Adjustment</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Points Quantity</label>
+                                                <input type="number" name="points" id="adjPoints_{{ $acc->id }}"
+                                                    class="form-control" required step="1" min="1" placeholder="500">
+                                                <div id="adjHint_{{ $acc->id }}" class="form-text text-muted d-none" style="font-size:.75rem">
+                                                    Use a <strong>negative value</strong> (e.g. <code>-200</code>) to deduct, positive to add.
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Reason / Description</label>
+                                            <input type="text" name="description" class="form-control" required placeholder="VIP bonus / stay reward">
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Reason / Description</label>
-                                        <input type="text" name="description" class="form-control" required placeholder="VIP bonus / stay reward">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Submit Adjustment</button>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Submit Adjustment</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -158,30 +162,34 @@
 </div>
 
 <!-- Modal: Enroll Guest -->
-<div class="modal fade" id="enrollGuestModal" tabindex="-1">
-    <div class="modal-dialog">
-        <form method="POST" action="{{ route('admin.loyalty.enroll') }}" class="modal-content">
-            @csrf
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold"><i class="bi bi-person-plus me-2 text-primary"></i>Enroll Guest in Loyalty</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Select Guest Profile</label>
-                    <select name="guest_profile_id" class="form-select" required>
-                        <option value="">-- Choose Guest Profile --</option>
-                        @foreach($guestsWithoutAccount as $gst)
-                            <option value="{{ $gst->id }}">{{ $gst->fullName }} ({{ $gst->email }})</option>
-                        @endforeach
-                    </select>
+<div class="modal fade" id="enrollGuestModal" tabindex="-1" aria-labelledby="enrollGuestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('admin.loyalty.enroll') }}">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="enrollGuestModalLabel">
+                        <i class="bi bi-person-plus me-2 text-primary"></i>Enroll Guest in Loyalty
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Enroll Member</button>
-            </div>
-        </form>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Select Guest Profile</label>
+                        <select name="guest_profile_id" class="form-select" required>
+                            <option value="">-- Choose Guest Profile --</option>
+                            @foreach($guestsWithoutAccount as $gst)
+                                <option value="{{ $gst->id }}">{{ $gst->fullName }} ({{ $gst->email }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Enroll Member</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
