@@ -23,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handleWebhook'])->name('api.webhooks.stripe');
 Route::post('/v1/webhooks/{provider}', [WebhookReceiverController::class, 'handleWebhook'])->name('api.webhooks.provider');
+
+// Self-Service Kiosk API & Certified Mobile Key Lock Integration Endpoints
+Route::post('/v1/kiosk/checkin', [\App\Http\Controllers\Api\V1\KioskApiController::class, 'kioskCheckin'])->name('api.v1.kiosk.checkin');
+Route::post('/v1/mobile-key/issue', [\App\Http\Controllers\Api\V1\KioskApiController::class, 'issueMobileKey'])->name('api.v1.mobile-key.issue');

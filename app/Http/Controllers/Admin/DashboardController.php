@@ -24,8 +24,16 @@ class DashboardController extends Controller
         $property = app()->bound('current.property') ? app('current.property') : null;
 
         if (!$property && $user) {
-            $property = Property::whereHas('organization', fn($q) => $q->where('id', $user->organization_id))->first() ?? Property::first();
-            if ($property) {
+            if ($user->is_platform_admin) {
+                $property = Property::first();
+            } else {
+                $property = $user->assignedProperties()
+                    ->where('organization_id', $user->organization_id)
+                    ->where('property_user_assignments.is_active', true)
+                    ->first();
+            }
+
+            if ($property && $user->canAccessProperty($property)) {
                 session(['current_property_id' => $property->id]);
                 app()->instance('current.property', $property);
             }

@@ -5,21 +5,21 @@
 @section('content')
 <div>
     <div class="mb-4">
-        <h1 class="form-header-title">Welcome back</h1>
-        <p class="form-header-sub">Sign in to your hotel management workspace</p>
+        <h1 class="form-title-main">Welcome back</h1>
+        <p class="form-subtitle-main">Sign in to your hotel management workspace</p>
     </div>
 
     @if($errors->any())
-    <div class="alert alert-danger mb-4 d-flex align-items-center rounded-3 p-3" style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5;">
-        <i class="fa-solid fa-circle-exclamation me-3 fs-5"></i>
-        <div class="small fw-medium">{{ $errors->first() }}</div>
+    <div class="alert alert-danger mb-4 d-flex align-items-center rounded-3 p-3" style="background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b;">
+        <i class="bi bi-exclamation-triangle-fill me-3 fs-5"></i>
+        <div class="small fw-bold">{{ $errors->first() }}</div>
     </div>
     @endif
 
     @if(session('status'))
-    <div class="alert alert-success mb-4 d-flex align-items-center rounded-3 p-3" style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.3); color: #86efac;">
-        <i class="fa-solid fa-circle-check me-3 fs-5"></i>
-        <div class="small fw-medium">{{ session('status') }}</div>
+    <div class="alert alert-success mb-4 d-flex align-items-center rounded-3 p-3" style="background: #dcfce7; border: 1px solid #86efac; color: #166534;">
+        <i class="bi bi-check-circle-fill me-3 fs-5"></i>
+        <div class="small fw-bold">{{ session('status') }}</div>
     </div>
     @endif
 
@@ -27,80 +27,83 @@
         @csrf
 
         <!-- Email Field -->
-        <div class="mb-4">
-            <label class="form-label" for="email">Work Email Address</label>
-            <div class="input-group-custom">
-                <i class="fa-solid fa-envelope input-icon"></i>
-                <input type="email" class="form-control-luxury @error('email') is-invalid @enderror"
+        <div class="mb-3">
+            <label class="form-label-dashboard" for="email">Work Email Address</label>
+            <div class="input-group-dashboard">
+                <i class="bi bi-envelope input-icon"></i>
+                <input type="email" class="form-control-dashboard @error('email') is-invalid @enderror"
                        id="email" name="email" value="{{ old('email') }}"
                        placeholder="name@hotelgroup.com" autofocus required>
             </div>
             @error('email')
-            <div class="invalid-feedback d-block mt-1 small" style="color: #fca5a5;">{{ $message }}</div>
+            <div class="invalid-feedback d-block mt-1 small text-danger fw-bold">{{ $message }}</div>
             @enderror
         </div>
 
         <!-- Password Field -->
         <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center mb-1">
-                <label class="form-label mb-0" for="password">Security Password</label>
-                <a href="#" onclick="alert('Please contact your System Administrator to reset your staff credentials.'); return false;" class="forgot-link">Forgot password?</a>
+                <label class="form-label-dashboard mb-0" for="password">Security Password</label>
+                <a href="#" onclick="alert('Please contact your System Administrator to reset your staff credentials.'); return false;" class="text-decoration-none small fw-bold text-dark">Forgot password?</a>
             </div>
-            <div class="input-group-custom">
-                <i class="fa-solid fa-lock input-icon"></i>
-                <input type="password" class="form-control-luxury @error('password') is-invalid @enderror"
+            <div class="input-group-dashboard">
+                <i class="bi bi-lock input-icon"></i>
+                <input type="password" class="form-control-dashboard @error('password') is-invalid @enderror"
                        id="password" name="password"
                        placeholder="••••••••••••" required>
-                <button type="button" class="password-toggle-btn" id="togglePassword" title="Toggle password visibility">
-                    <i class="fa-solid fa-eye" id="passwordEyeIcon"></i>
+                <button type="button" class="btn btn-link position-absolute end-0 text-muted pe-3 text-decoration-none" id="togglePassword" title="Toggle password visibility" style="z-index: 5;">
+                    <i class="bi bi-eye" id="passwordEyeIcon"></i>
                 </button>
             </div>
             @error('password')
-            <div class="invalid-feedback d-block mt-1 small" style="color: #fca5a5;">{{ $message }}</div>
+            <div class="invalid-feedback d-block mt-1 small text-danger fw-bold">{{ $message }}</div>
             @enderror
         </div>
 
         <!-- Remember Me Checkbox -->
-        <div class="mb-4 d-flex align-items-center justify-content-between">
+        <div class="mb-4">
             <div class="form-check d-flex align-items-center gap-2 mb-0">
-                <input class="form-check-input form-check-input-gold" type="checkbox" id="remember" name="remember" checked>
-                <label class="form-check-label-custom mb-0" for="remember">
+                <input class="form-check-input" type="checkbox" id="remember" name="remember" checked style="cursor: pointer;">
+                <label class="form-check-label text-secondary small mb-0 fw-semibold" for="remember" style="cursor: pointer; user-select: none;">
                     Keep me signed in on this device
                 </label>
             </div>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn-luxury-primary" id="loginBtn">
+        <button type="submit" class="btn-lime-primary" id="loginBtn">
             <span id="loginText" class="d-flex align-items-center justify-content-center gap-2">
-                <i class="fa-solid fa-right-to-bracket"></i> Sign In to Portal
+                <i class="bi bi-box-arrow-in-right fs-5"></i> Sign In to Portal
             </span>
             <span id="loginSpinner" class="d-none">
-                <i class="fa-solid fa-circle-notch fa-spin me-2"></i> Authenticating Credentials...
+                <i class="bi bi-arrow-repeat spin me-2"></i> Authenticating...
             </span>
         </button>
     </form>
 
-    <!-- Quick Demo Logins Helper Card -->
-    <div class="demo-credentials-box">
-        <div class="demo-title">
-            <span><i class="fa-solid fa-key me-1 text-warning"></i> Quick Demo Access</span>
-            <span class="text-muted fw-normal" style="font-size: 0.7rem;">Click to Autofill</span>
+    <!-- Quick Staff Role Switcher -->
+    <div class="demo-roles-card">
+        <div class="demo-roles-title">
+            <span><i class="bi bi-key-fill me-1 text-warning"></i> Quick Demo Access</span>
+            <span class="text-muted fw-normal" style="font-size: 0.68rem;">Click to Autofill</span>
         </div>
-        <div class="d-flex flex-wrap gap-2">
-            <button type="button" class="demo-pill" onclick="fillDemo('admin@platform.com', 'password')">
-                <i class="fa-solid fa-user-shield text-warning"></i> Platform Admin
+        <div class="d-flex flex-column gap-2">
+            <button type="button" class="demo-role-btn justify-content-between" onclick="fillDemo('admin@platform.com', 'password')">
+                <span><i class="bi bi-shield-lock-fill text-warning me-1"></i> Platform Admin</span>
+                <span class="text-secondary small fw-normal">admin@platform.com</span>
             </button>
-            <button type="button" class="demo-pill" onclick="fillDemo('manager@tembohotel.com', 'password')">
-                <i class="fa-solid fa-user-tie text-info"></i> Org Manager
+            <button type="button" class="demo-role-btn justify-content-between" onclick="fillDemo('manager@tembohotel.com', 'password')">
+                <span><i class="bi bi-briefcase-fill text-info me-1"></i> Org Manager</span>
+                <span class="text-secondary small fw-normal">manager@tembohotel.com</span>
             </button>
-            <button type="button" class="demo-pill" onclick="fillDemo('reception@tembohotel.com', 'password')">
-                <i class="fa-solid fa-concierge-bell text-success"></i> Front Desk
+            <button type="button" class="demo-role-btn justify-content-between" onclick="fillDemo('reception@tembohotel.com', 'password')">
+                <span><i class="bi bi-person-workspace text-success me-1"></i> Front Desk</span>
+                <span class="text-secondary small fw-normal">reception@tembohotel.com</span>
             </button>
         </div>
     </div>
 
-    <div class="auth-footer-text">
+    <div class="text-center text-muted small mt-4">
         &copy; {{ date('Y') }} {{ config('app.name', 'Hotel Booking Platform') }}. All rights reserved.
     </div>
 </div>
@@ -114,10 +117,10 @@
         const icon = document.getElementById('passwordEyeIcon');
         if (pwd.type === 'password') {
             pwd.type = 'text';
-            icon.className = 'fa-solid fa-eye-slash';
+            icon.className = 'bi bi-eye-slash';
         } else {
             pwd.type = 'password';
-            icon.className = 'fa-solid fa-eye';
+            icon.className = 'bi bi-eye';
         }
     });
 
@@ -136,9 +139,8 @@
         emailInput.value = email;
         passwordInput.value = password;
         
-        // Add subtle flash effect
-        emailInput.style.borderColor = '#c5a059';
-        passwordInput.style.borderColor = '#c5a059';
+        emailInput.style.borderColor = '#151b16';
+        passwordInput.style.borderColor = '#151b16';
         
         setTimeout(() => {
             emailInput.style.borderColor = '';

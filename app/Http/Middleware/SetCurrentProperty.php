@@ -21,15 +21,29 @@ class SetCurrentProperty
             $property   = null;
 
             if ($propertyId) {
-                $property = \App\Infrastructure\Persistence\Property::find($propertyId);
+                $candidate = \App\Infrastructure\Persistence\Property::find($propertyId);
+                if ($candidate && $user->canAccessProperty($candidate)) {
+                    $property = $candidate;
+                }
             }
 
-            if (!$property || !$user->canAccessProperty($property)) {
-                $property = \App\Infrastructure\Persistence\Property::whereHas('organization', fn($q) => $q->where('id', $user->organization_id))->first()
-                    ?? \App\Infrastructure\Persistence\Property::first();
+            if (!$property) {
+                // Find first property the user is explicitly authorized to access
+                if ($user->is_platform_admin) {
+                    $property = \App\Infrastructure\Persistence\Property::first();
+                } else {
+                    $property = $user->assignedProperties()
+                        ->where('properties.organization_id', $user->organization_id)
+                        ->where('property_user_assignments.is_active', true)
+                        ->where(fn($q) => $q->whereNull('property_user_assignments.expires_at')
+                                            ->orWhere('property_user_assignments.expires_at', '>', now()))
+                        ->first();
+                }
 
                 if ($property) {
                     session(['current_property_id' => $property->id]);
+                } else {
+                    session()->forget('current_property_id');
                 }
             }
 

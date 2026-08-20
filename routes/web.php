@@ -138,6 +138,43 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('quotes/inspector',          [\App\Http\Controllers\Admin\QuoteInspectorController::class, 'index'])->name('quotes.index');
     Route::post('quotes/generate',          [\App\Http\Controllers\Admin\QuoteInspectorController::class, 'generate'])->name('quotes.generate');
 
+    // Next-Gen Expansion Modules — Full POS Suite
+    Route::get('pos/terminal',                                  [\App\Http\Controllers\Admin\PosTerminalController::class, 'index'])->name('pos.terminal');
+    Route::post('pos/orders',                                   [\App\Http\Controllers\Admin\PosTerminalController::class, 'storeOrder'])->name('pos.orders.store');
+    Route::post('pos/stk-push',                                 [\App\Http\Controllers\Admin\PosTerminalController::class, 'stkPush'])->name('pos.stk-push');
+    Route::post('pos/stripe-charge',                            [\App\Http\Controllers\Admin\PosTerminalController::class, 'stripeCharge'])->name('pos.stripe-charge');
+
+    Route::get('pos/orders-history',                            [\App\Http\Controllers\Admin\PosOrderController::class, 'index'])->name('pos.orders.index');
+
+    Route::get('pos/outlets',                                   [\App\Http\Controllers\Admin\PosOutletController::class, 'index'])->name('pos.outlets.index');
+    Route::post('pos/outlets',                                  [\App\Http\Controllers\Admin\PosOutletController::class, 'store'])->name('pos.outlets.store');
+
+    Route::get('pos/menu',                                      [\App\Http\Controllers\Admin\PosMenuController::class, 'index'])->name('pos.menu.index');
+    Route::post('pos/menu',                                     [\App\Http\Controllers\Admin\PosMenuController::class, 'store'])->name('pos.menu.store');
+
+    Route::get('pos/stock',                                     [\App\Http\Controllers\Admin\PosStockController::class, 'index'])->name('pos.stock.index');
+    Route::post('pos/stock',                                    [\App\Http\Controllers\Admin\PosStockController::class, 'store'])->name('pos.stock.store');
+
+    // Next-Gen Expansion Modules — Integrations & Payment Settings
+    Route::get('integrations/settings',                         [\App\Http\Controllers\Admin\IntegrationSettingsController::class, 'index'])->name('integrations.settings');
+    Route::post('integrations/settings',                        [\App\Http\Controllers\Admin\IntegrationSettingsController::class, 'update'])->name('integrations.settings.update');
+
+    // Next-Gen Expansion Modules — Digital Guest Journey & Accountless Pre-Registration
+    Route::get('guest/pre-registration/{token}',                [\App\Http\Controllers\Guest\GuestJourneyController::class, 'preRegistration'])->name('guest.pre-registration');
+    Route::post('guest/pre-registration/{token}',               [\App\Http\Controllers\Guest\GuestJourneyController::class, 'storePreRegistration'])->name('guest.pre-registration.store');
+    Route::get('guest/pre-registration/{token}/success',        [\App\Http\Controllers\Guest\GuestJourneyController::class, 'preRegistrationSuccess'])->name('guest.pre-registration.success');
+
+    Route::get('guest/request-portal/{token}',                  [\App\Http\Controllers\Guest\GuestJourneyController::class, 'requestPortal'])->name('guest.request.portal');
+    Route::post('guest/request-portal/{token}',                 [\App\Http\Controllers\Guest\GuestJourneyController::class, 'storeRequest'])->name('guest.request.store');
+
+    Route::get('digital-registrations',                         [\App\Http\Controllers\Admin\DigitalRegistrationAdminController::class, 'index'])->name('digital-registrations.index');
+
+    Route::get('migration',                                     [\App\Http\Controllers\Admin\MigrationImportController::class, 'index'])->name('migration.index');
+    Route::post('migration/preview',                            [\App\Http\Controllers\Admin\MigrationImportController::class, 'preview'])->name('migration.preview');
+    Route::post('migration/execute',                            [\App\Http\Controllers\Admin\MigrationImportController::class, 'execute'])->name('migration.execute');
+
+    Route::get('inbox',                                         [\App\Http\Controllers\Admin\GuestInboxController::class, 'index'])->name('inbox.index');
+
     // Users
     Route::resource('users', UserController::class)->except(['destroy']);
 });

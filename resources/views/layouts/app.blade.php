@@ -745,6 +745,43 @@
             <span>In-House</span>
         </a>
 
+        <a href="{{ route('admin.digital-registrations.index') }}" class="sidebar-link {{ request()->routeIs('admin.digital-registrations*') ? 'active' : '' }}">
+            <i class="bi bi-person-vcard"></i>
+            <span>Pre-Registrations</span>
+        </a>
+
+        <a href="{{ route('admin.inbox.index') }}" class="sidebar-link {{ request()->routeIs('admin.inbox*') ? 'active' : '' }}">
+            <i class="bi bi-chat-dots"></i>
+            <span>Guest Inbox</span>
+        </a>
+
+        <div class="sidebar-section">Point of Sale (POS) Suite</div>
+
+        <a href="{{ route('admin.pos.terminal') }}" class="sidebar-link {{ request()->routeIs('admin.pos.terminal') ? 'active' : '' }}">
+            <i class="bi bi-display"></i>
+            <span>Touch POS Terminal</span>
+        </a>
+
+        <a href="{{ route('admin.pos.orders.index') }}" class="sidebar-link {{ request()->routeIs('admin.pos.orders*') ? 'active' : '' }}">
+            <i class="bi bi-receipt-cutoff"></i>
+            <span>Sales Orders Roster</span>
+        </a>
+
+        <a href="{{ route('admin.pos.outlets.index') }}" class="sidebar-link {{ request()->routeIs('admin.pos.outlets*') ? 'active' : '' }}">
+            <i class="bi bi-shop"></i>
+            <span>POS Outlets</span>
+        </a>
+
+        <a href="{{ route('admin.pos.menu.index') }}" class="sidebar-link {{ request()->routeIs('admin.pos.menu*') ? 'active' : '' }}">
+            <i class="bi bi-journal-text"></i>
+            <span>Menu Catalog</span>
+        </a>
+
+        <a href="{{ route('admin.pos.stock.index') }}" class="sidebar-link {{ request()->routeIs('admin.pos.stock*') ? 'active' : '' }}">
+            <i class="bi bi-box-seam"></i>
+            <span>Stock & Ingredients</span>
+        </a>
+
         <div class="sidebar-section">Operations</div>
 
         <a href="{{ route('admin.housekeeping.index') }}" class="sidebar-link {{ request()->routeIs('admin.housekeeping*') ? 'active' : '' }}">
@@ -770,6 +807,11 @@
         </a>
 
         <div class="sidebar-section">Integrations</div>
+
+        <a href="{{ route('admin.integrations.settings') }}" class="sidebar-link {{ request()->routeIs('admin.integrations.settings*') ? 'active' : '' }}">
+            <i class="bi bi-credit-card-2-front"></i>
+            <span>Payment API Settings</span>
+        </a>
 
         <a href="{{ route('admin.channel-manager.index') }}" class="sidebar-link {{ request()->routeIs('admin.channel-manager*') ? 'active' : '' }}">
             <i class="bi bi-diagram-3"></i>
@@ -811,6 +853,11 @@
         </a>
 
         <div class="sidebar-section">Configuration</div>
+
+        <a href="{{ route('admin.migration.index') }}" class="sidebar-link {{ request()->routeIs('admin.migration*') ? 'active' : '' }}">
+            <i class="bi bi-file-earmark-spreadsheet"></i>
+            <span>Data Migration</span>
+        </a>
 
         <a href="{{ route('admin.properties.index') }}" class="sidebar-link {{ request()->routeIs('admin.properties*') ? 'active' : '' }}">
             <i class="bi bi-buildings"></i>
